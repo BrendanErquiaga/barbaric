@@ -1,9 +1,10 @@
-function rampage(){
-    tinySpider.movesTo(10,10);
-    console.log('tiny - ',tinySpider.position);
+"use strict";
 
-    darkSpider.movesTo(5,5);
-    console.log('dark hp - ',darkSpider.hp);
+function rampage(){
+    wizard.movesTo(5,5);
+    console.log(wizard.name + ' has a name');
+
+    book.movesTo(3,3);
 }
 
 $(document).ready(function() {

@@ -1,3 +1,5 @@
+"use strict";
+
 function rollDie(sides){
     return getRandomInt(1,sides);
 }
