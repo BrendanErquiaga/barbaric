@@ -2,8 +2,8 @@
 
 function rampage(){
     wizard.movesTo(5,5);
-    console.log(wizard.name + ' has a name');
-
+    wizard.name = 'Nayara';
+    wizard.steals(book, 'Candy');
     book.movesTo(3,3);
 }
 

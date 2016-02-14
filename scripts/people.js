@@ -1,9 +1,11 @@
 "use strict";
 
-var canBeIdentifiedByName = {
+var canBeIdentifiedByName = function canBeIdentifiedByName(state) {
+  return {
     toString: function toString() {
-        return this.name;
+      return state.name;
     }
+  };
 };
 
 var canBeDescribed = {
@@ -33,8 +35,8 @@ function human(name, race, hp) {
         name,
         race,
         hp};
-    return Object.assign(
-               canBeIdentifiedByName,
+    return Object.assign({},
+               canBeIdentifiedByName(humanState),
                canBeDescribed,
                canBePositioned,
                canSteal(humanState));
@@ -45,8 +47,8 @@ function item(name, type) {
         name: name,
         type: type
         };
-    return Object.assign(
-                canBeIdentifiedByName,
+    return Object.assign({},
+                canBeIdentifiedByName(itemState),
                 canBeDescribed,
                 canBePositioned);
 }
