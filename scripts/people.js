@@ -53,6 +53,6 @@ function item(name, type) {
                 canBePositioned);
 }
 
-var wizard = new human('Naya', 'Ygri', 100);
+var wizard = new human('Nayara', 'Ygri', 100);
 
 var book = new item('Spellbook', 'Data');
