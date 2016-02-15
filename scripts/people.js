@@ -1,58 +1,16 @@
 "use strict";
 
-var canBeIdentifiedByName = function canBeIdentifiedByName(state) {
-  return {
-    toString: function toString() {
-      return state.name;
-    }
-  };
-};
+function human(name, age, description, hp) {
+    var currentHP,
+        maxHP;
 
-var canBeDescribed = {
-    shortDescription: 'a short description',
-    longerDescription: 'a much longer description'
-};
-
-var canBePositioned = {
-    position: { x: 0, y: 0 },
-    movesTo: function movesTo(x, y) {
-        console.log(this + ' moves from (' + this.position.x + ', ' + this.position.y + ') to (' + x + ', ' + y + ')');
-        this.position.x = x;
-        this.position.y = y;
-    }
-};
-
-var canSteal = function canSteal(state) {
-    return {
-        steals: function steals(target, item) {
-            console.log(state.name + ' steals ' + item + ' from ' + target);
-        }
-    };
-};
-
-function human(name, race, hp) {
     var humanState = {
-        name,
-        race,
-        hp};
-    return Object.assign({},
+                name: name,
+                age: age,
+                description: description,
+                currentHP: hp,
+                maxHP: hp};
+    return Object.assign(humanState,
                canBeIdentifiedByName(humanState),
-               canBeDescribed,
-               canBePositioned,
-               canSteal(humanState));
+               hasHealth(humanState));
 }
-
-function item(name, type) {
-    var itemState = {
-        name: name,
-        type: type
-        };
-    return Object.assign({},
-                canBeIdentifiedByName(itemState),
-                canBeDescribed,
-                canBePositioned);
-}
-
-var wizard = new human('Nayara', 'Ygri', 100);
-
-var book = new item('Spellbook', 'Data');

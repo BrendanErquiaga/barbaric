@@ -1,14 +1,11 @@
 "use strict";
 
 function rampage(){
-    wizard.movesTo(5,5);
-    wizard.name = 'Naya';
-    wizard.steals(book, 'Candy');
-    book.movesTo(3,3);
+    runTests();
 }
 
 $(document).ready(function() {
-    requirejs(['scripts/utils','scripts/screen-output','scripts/testing','scripts/people'], function() {
+    requirejs(['scripts/utils','scripts/screen-output','scripts/testing','scripts/people','scripts/items'], function() {
         rampage();
     });
 });
