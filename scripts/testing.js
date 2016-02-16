@@ -1,14 +1,12 @@
 var bob = new Human('bob', 22, 'a builder', 100, {});
-var stick = new Equipment('stick', 'toy', 'hand');
-var sword = new Equipment('fSword', 'weapon', 'hand');
-//var fSword = new FancyEquipment('big sword', 'great weapon', 'hand');
+var sally = new Human('sally', 12, 'a seller', 500, {});
 
 function runTests(){
-    console.log("Beginning tests");
 
+    console.log(bob.healthStatus());
+    console.log(sally.healthStatus());
+    bob.currentHP -= 50;
+    console.log(bob.healthStatus());
+    console.log(sally.healthStatus());
 
-    console.log("I made these: " + stick + ', ' + sword);
-    bob.equip(stick);
-    bob.equip(sword);
-    console.log(bob.equipment);
 }

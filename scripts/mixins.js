@@ -8,18 +8,20 @@ var canBeIdentifiedByName = function canBeIdentifiedByName(state) {
   };
 };
 
-var canSteal = function canSteal(state) {
-    return {
-        steals: function steals(target, item) {
-            console.log(state.name + ' steals ' + item + ' from ' + target);
-        }
-    };
-};
+var hasHealth = function hasHealth(state, hp) {
+    var currentHP = hp,
+            maxHP = hp;
 
-var hasHealth = function hasHealth(state) {
     return{
+        get currentHP() { return currentHP; },
+        set currentHP(value) { currentHP = value;},
+        get maxHP() { return maxHP; },
+        set maxHP(value) { maxHP = value;},
+
         healthStatus: function healthStatus() {
             var healthPercentage = state.currentHP / state.maxHP;
+
+            console.log('Checking ' + state +"'s HP: "  + currentHP + '/' + maxHP + '=' + healthPercentage);
 
             if(healthPercentage == 1){
                 return 'Full HP';
@@ -38,7 +40,7 @@ var hasHealth = function hasHealth(state) {
     };
 };
 
-var canEquipItems = function canEquipItems(state){
+var canEquipEquipment = function canEquipEquipment(state){
     return {
         dropEquipment: function dropEquipment(itemToDrop){
             console.log(state + ' dropped ' + itemToDrop + ' ...');
