@@ -9,19 +9,16 @@ function Item(name, type) {
                 canBeIdentifiedByName(itemState));
 }
 
-function FancyItem(name) {
-    var itemState = {
-            name: name,
-            };
-        return Object.assign(itemState,
-                    canBeIdentifiedByName(itemState));
+function BasicItem(name, type){
+    this.name = name;
+    this.type = type;
 }
 
 function FancyEquipment(name, type, slot){
-    FancyItem.apply(this, name);
+    BasicItem.apply(this, [name, type]);
     this.slot = slot;
 }
-FancyEquipment.prototype = Object.create(FancyItem.prototype);
+FancyEquipment.prototype = Object.create(BasicItem.prototype);
 FancyEquipment.prototype.constructor = FancyEquipment;
 
 function Equipment(name, type, slot) {
