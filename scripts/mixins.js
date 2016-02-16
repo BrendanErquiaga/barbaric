@@ -8,11 +8,33 @@ var canBeIdentifiedByName = function canBeIdentifiedByName(state) {
   };
 };
 
+var canEquipEquipment = function canEquipEquipment(state){
+    return {
+        dropEquipment: function dropEquipment(itemToDrop){
+            console.log(state + ' dropped ' + itemToDrop + ' ...');
+            var index = state.equipment.indexOf(itemToDrop);
+            state.equipment.splice(index -1, 1);
+        },
+
+        equip: function equip(itemToEquip){
+            for(var i = 0; i < state.equipment.length; i++){
+                if(state.equipment[i].slot == itemToEquip.slot){
+                    state.dropEquipment(state.equipment[i]);
+                    break;
+                }
+            }
+
+            state.equipment.push(itemToEquip);
+            console.log(state + ' equipped the ' + itemToEquip);
+        }
+    };
+};
+
 var hasHealth = function hasHealth(state, hp) {
     var currentHP = hp,
             maxHP = hp;
 
-    return{
+    return {
         get currentHP() { return currentHP; },
         set currentHP(value) { currentHP = value;},
         get maxHP() { return maxHP; },
@@ -40,24 +62,30 @@ var hasHealth = function hasHealth(state, hp) {
     };
 };
 
-var canEquipEquipment = function canEquipEquipment(state){
+var hasStats = function hasStats(state, newStats) {
+    var agility = newStats.agility || 10,
+        constitution = newStats.constitution || 11,
+        intelligence = newStats.intelligence || 12,
+        strength = newStats.strength || 13;
+
     return {
-        dropEquipment: function dropEquipment(itemToDrop){
-            console.log(state + ' dropped ' + itemToDrop + ' ...');
-            var index = state.equipment.indexOf(itemToDrop);
-            state.equipment.splice(index -1, 1);
-        },
+        get agility() { return agility; },
+        set agility(value) { agility = value},
 
-        equip: function equip(itemToEquip){
-            for(var i = 0; i < state.equipment.length; i++){
-                if(state.equipment[i].slot == itemToEquip.slot){
-                    state.dropEquipment(state.equipment[i]);
-                    break;
-                }
-            }
+        get constitution() { return constitution; },
+        set constitution(value) { constitution = value; },
 
-            state.equipment.push(itemToEquip);
-            console.log(state + ' equipped the ' + itemToEquip);
+        get intelligence() { return intelligence; },
+        set intelligence(value) { intelligence = value; },
+
+        get strength() { return strength; },
+        set strength(value) { strength = value; },
+
+        statString: function() {
+        return ('Agi: ' + state.agility + ',' +
+                'Con: ' + state.constitution + ',' +
+                'Int: ' + state.intelligence + ',' +
+                'Str: ' + state.strength);
         }
     };
 };
