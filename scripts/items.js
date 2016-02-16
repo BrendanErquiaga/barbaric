@@ -1,15 +1,30 @@
 "use strict";
 
-function item(name, type) {
+function Item(name, type) {
     var itemState = {
         name: name,
         type: type
         };
-    return Object.assign({},
+    return Object.assign(itemState,
                 canBeIdentifiedByName(itemState));
 }
 
-function equipment(name, type, slot) {
+function FancyItem(name) {
+    var itemState = {
+            name: name,
+            };
+        return Object.assign(itemState,
+                    canBeIdentifiedByName(itemState));
+}
+
+function FancyEquipment(name, type, slot){
+    FancyItem.apply(this, name);
+    this.slot = slot;
+}
+FancyEquipment.prototype = Object.create(FancyItem.prototype);
+FancyEquipment.prototype.constructor = FancyEquipment;
+
+function Equipment(name, type, slot) {
     var equipmentState = {
                 name: name,
                 type: type,

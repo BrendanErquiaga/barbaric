@@ -1,6 +1,6 @@
 "use strict";
 
-function human(name, age, description, hp, stats) {
+function Human(name, age, description, hp, stats) {
     var currentHP,
         maxHP,
         stats,
