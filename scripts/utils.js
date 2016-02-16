@@ -43,13 +43,27 @@ var hasHealth = function hasHealth(state) {
                 return 'Dead';
             }
         }
-    }
-}
+    };
+};
 
-//var canBeDescribedDeadOrAlive = function canBeDescribedDeadOrAlive(state) {
-//  return {
-//    toString: function toString() {
-//      return state.name;
-//    }
-//  };
-//};
+var canEquipItems = function canEquipItems(state){
+    return {
+        dropEquipment: function dropEquipment(itemToDrop){
+            console.log(state + ' dropped ' + itemToDrop + ' ...');
+            var index = state.equipment.indexOf(itemToDrop);
+            state.equipment.splice(index -1, 1);
+        },
+
+        equip: function equip(itemToEquip){
+            for(var i = 0; i < state.equipment.length; i++){
+                if(state.equipment[i].slot == itemToEquip.slot){
+                    state.dropEquipment(state.equipment[i]);
+                    break;
+                }
+            }
+
+            state.equipment.push(itemToEquip);
+            console.log(state + ' equipped the ' + itemToEquip);
+        }
+    };
+};

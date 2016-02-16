@@ -1,14 +1,13 @@
+var bob = new human('bob', 22, 'a builder', 100, {});
+var stick = new equipment('stick', 'weapon', 'hand');
+var sword = new equipment('sword', 'weapon', 'hand');
+
 function runTests(){
     console.log("Beginning tests");
-//    console.log(bob);
-//    bob.currentHP -= 20;
-//    console.log(bob.healthStatus());
-//    bob.currentHP -= 20;
-//    console.log(bob.healthStatus());
-//    bob.currentHP -= 20;
-//    console.log(bob.healthStatus());
-//    bob.currentHP -= 20;
-//    console.log(bob.healthStatus());
-//    bob.currentHP -= 20;
-//    console.log(bob.healthStatus());
+
+
+    console.log("I made these: " + stick + ', ' + sword);
+    bob.equip(stick);
+    bob.equip(sword);
+    console.log(bob.equipment);
 }

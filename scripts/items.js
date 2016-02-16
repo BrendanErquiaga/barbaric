@@ -8,3 +8,14 @@ function item(name, type) {
     return Object.assign({},
                 canBeIdentifiedByName(itemState));
 }
+
+function equipment(name, type, slot) {
+    var equipmentState = {
+                name: name,
+                type: type,
+                slot: slot
+                };
+
+    return Object.assign(equipmentState,
+                    canBeIdentifiedByName(equipmentState));
+}
