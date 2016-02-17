@@ -62,18 +62,24 @@ var hasHealth = function hasHealth(state, hp) {
     };
 };
 
+var defaultStatValue = 10;
 var hasStats = function hasStats(state, newStats) {
-    var agility = newStats.agility || 10,
-        constitution = newStats.constitution || 11,
-        intelligence = newStats.intelligence || 12,
-        strength = newStats.strength || 13;
+    var charisma = newStats.charisma || defaultStatValue,
+        constitution = newStats.constitution || defaultStatValue,
+        dexterity = newStats.dexterity || defaultStatValue,
+        intelligence = newStats.intelligence || defaultStatValue,
+        strength = newStats.strength || defaultStatValue,
+        wisdom = newStats.wisdom || defaultStatValue;
 
     return {
-        get agility() { return agility; },
-        set agility(value) { agility = value},
+        get charisma() { return charisma; },
+        set charisma(value) { charisma = value; },
 
         get constitution() { return constitution; },
         set constitution(value) { constitution = value; },
+
+        get dexterity() { return dexterity; },
+        set dexterity(value) { dexterity = value},
 
         get intelligence() { return intelligence; },
         set intelligence(value) { intelligence = value; },
@@ -81,11 +87,16 @@ var hasStats = function hasStats(state, newStats) {
         get strength() { return strength; },
         set strength(value) { strength = value; },
 
+        get wisdom() { return wisdom; },
+        set wisdom(value) { wisdom = value; },
+
         statString: function() {
-        return ('Agi: ' + state.agility + ',' +
+        return ('Cha: ' + state.charisma + ',' +
                 'Con: ' + state.constitution + ',' +
+                'Dex: ' + state.dexterity + ',' +
                 'Int: ' + state.intelligence + ',' +
-                'Str: ' + state.strength);
+                'Str: ' + state.strength + ',' +
+                'Wis: ' + state.wisdom);
         }
     };
 };
