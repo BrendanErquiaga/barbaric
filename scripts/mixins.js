@@ -62,14 +62,14 @@ var hasHealth = function hasHealth(state, hp) {
     };
 };
 
-var defaultStatValue = 10;
+var defaultStatValue = 0;
 var hasStats = function hasStats(state, newStats) {
-    var charisma = newStats.charisma || defaultStatValue,
-        constitution = newStats.constitution || defaultStatValue,
-        dexterity = newStats.dexterity || defaultStatValue,
-        intelligence = newStats.intelligence || defaultStatValue,
-        strength = newStats.strength || defaultStatValue,
-        wisdom = newStats.wisdom || defaultStatValue;
+    var charisma = newStats.charisma || newStats.default || defaultStatValue,
+        constitution = newStats.constitution || newStats.default ||defaultStatValue,
+        dexterity = newStats.dexterity || newStats.default ||defaultStatValue,
+        intelligence = newStats.intelligence || newStats.default ||defaultStatValue,
+        strength = newStats.strength || newStats.default ||defaultStatValue,
+        wisdom = newStats.wisdom || newStats.default ||defaultStatValue;
 
     return {
         get charisma() { return charisma; },

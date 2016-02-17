@@ -9,10 +9,15 @@ function Item(name, type) {
                 canBeIdentifiedByName(itemState));
 }
 
-function Equipment(name, type, slot) {
+function ItemWithStats(name, type, stats) {
+    var state = {};
+    return Object.assign(state, hasStats(state,stats), new Item(name,type));
+}
+
+function Equipment(name, type, slot, stats) {
     var equipmentState = {
                 slot: slot
                 };
 
-    return Object.assign(equipmentState, new Item(name,type));
+    return Object.assign(equipmentState, new ItemWithStats(name,type,stats));
 }
