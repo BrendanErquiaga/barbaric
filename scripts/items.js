@@ -11,7 +11,9 @@ function Item(name, type) {
 
 function ItemWithStats(name, type, stats) {
     var state = {};
-    return Object.assign(state, hasStats(state,stats), new Item(name,type));
+    return Object.assign(state,
+                hasStats(state,stats),
+                new Item(name,type));
 }
 
 function Equipment(name, type, slot, stats) {
@@ -19,5 +21,6 @@ function Equipment(name, type, slot, stats) {
                 slot: slot
                 };
 
-    return Object.assign(equipmentState, new ItemWithStats(name,type,stats));
+    return Object.assign(equipmentState,
+            new ItemWithStats(name,type,stats));
 }
