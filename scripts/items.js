@@ -1,27 +1,51 @@
 "use strict";
 
-function Item(name, type) {
+function Item(name, description, type) {
 
   var itemState = {
     name: name,
+    description: description,
     type: type
   };
 
   return Object.assign(itemState, canBeIdentifiedByName(itemState));
 }
 
-function ItemWithStats(name, type, stats) {
+function ItemWithStats(name, description, type, stats) {
   var state = {};
 
-  return Object.assign(state, hasStats(state, stats), new Item(name, type));
+  return Object.assign(state, hasStats(state, stats), new Item(name, description, type));
 
 }
 
-function Equipment(name, type, slot, stats) {
+function Equipment(name, description, type, slot, stats) {
 
   var equipmentState = {
     slot: slot
   };
 
-  return Object.assign(equipmentState, new ItemWithStats(name, type, stats));
+  return Object.assign(equipmentState, new ItemWithStats(name, description, type, stats));
 }
+
+function Weapon(name, description, damage, stats){
+    var weaponState = {
+        damage:damage
+    }
+
+    return Object.assign(weaponState, new Equipment(name, description, 'weapon','hands', stats));
+}
+
+
+/* Item Types */
+
+/* Equipment Slots
+    Head
+    Neck
+    Shoulders
+    Chest
+    Wrists
+    Hands
+    Waist
+    Legs
+    Feet
+*/
