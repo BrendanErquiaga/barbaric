@@ -7,6 +7,7 @@ var bob = new Human('bob', 22, 'a builder', 100, {default:20});
 
 function runTests(){
     for(var attackRoll = 1; attackRoll <= 100; attackRoll++){
-        console.log('Attacking bob for ' + attackRoll + ' = ' + calculateHitTable(bob,attackRoll,30));
+        var attackStatus = calculateAttack(bob, 10, 50);
+        //console.log('Attacking bob, hitStatus: ' + attackStatus.hitStatus + '. Dmg: ' + attackStatus.damage);
     }
 }

@@ -4,7 +4,9 @@ var fumbleCeiling = 1,//These numbers can't add up to more than 100 (though shol
     missCeiling = 10,
     dodgeCap = 20,
     parryCap = 20,
-    featCeiling = 100;
+    featCeiling = 100,
+    critMultiplier = 2,
+    featMultiplier = 10;
 
 /* Standard Attack Table
     Fumble 1 (Miss Next Attack Round)
@@ -15,9 +17,9 @@ var fumbleCeiling = 1,//These numbers can't add up to more than 100 (though shol
     Crit Z-99 - Attacker Based
     Feat 100 (Insane Damage? Instant Kill?)
 */
-function calculateHitTable(target, attackRoll, critChance) {
-    var dodgeCeiling = getAttackCeiling(target.dexterity,dodgeCap) + missCeiling;
-    var parryCeiling = getAttackCeiling(target.strength,parryCap) + dodgeCeiling;
+function calculateHitStatus(target, attackRoll, critChance) {
+    var dodgeCeiling = getHitStatusCeiling(target.dexterity,dodgeCap) + missCeiling;
+    var parryCeiling = getHitStatusCeiling(target.strength,parryCap) + dodgeCeiling;
     var calculatedCritChance = critChance || 0;
     var critFloor = featCeiling - calculatedCritChance;
 
@@ -38,12 +40,36 @@ function calculateHitTable(target, attackRoll, critChance) {
     }
 }
 
-function getAttackCeiling(stat,cap){
+function getHitStatusCeiling(stat,cap){
     if(stat >= cap)
         return cap;
     else
         return stat;
 }
+
+function calculateDamage(damage, hitStatus) {
+    switch(hitStatus){
+        case 'fumble':
+        case 'miss':
+        case 'dodge':
+        case 'parry':
+            return 0;
+        case 'crit':
+            return damage * critMultiplier;
+        case 'feat':
+            return damage * featMultiplier;
+        default:
+            return damage;
+    }
+}
+
+function calculateAttack(target, damage, critChance) {
+    var hitStatus = calculateHitStatus(target, rollDie(101), critChance);
+    return { damage: calculateDamage(damage, hitStatus),
+             hitStatus: hitStatus }
+}
+
+
 
 
 
