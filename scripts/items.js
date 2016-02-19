@@ -35,8 +35,9 @@ function Weapon(name, description, damage, stats){
     return Object.assign(weaponState, new Equipment(name, description, 'weapon','hands', stats));
 }
 
-
-/* Item Types */
+/* Item Types
+    Weapon
+*/
 
 /* Equipment Slots
     Head

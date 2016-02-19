@@ -100,3 +100,11 @@ var hasStats = function hasStats(state, newStats) {
         }
     };
 };
+
+var canAttack = function canAttack(state) {
+    return {
+        attack: function(target, damage) {
+            target.currentHP -= damage;
+        }
+    }
+}
