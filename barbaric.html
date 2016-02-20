@@ -1,38 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/barbaric.css"/>
+    <title>barbaric!</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script data-main="main" src="require.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
-    <style type="text/css">
-        body {
-        background: #11111f;
-        color: #ccc;
-        font-family: 'VT323';
-        font-size: 18px;
-        }
-        input {
-        background: #11111f;
-        color: #fff;
-        width: 75%;
-        }
-        p {
-        width: 75%;
-        }
-    </style>
 </head>
 <body>
-<h1>barbaric!</h1>
-<p>rage!
-    <br />
-    ---------------------</p>
-<br />
-<br />
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <!--<li role="presentation" class="active"><a href="#">Home</a></li>-->
+                    <!--<li role="presentation"><a href="#">About</a></li>-->
+                </ul>
+            </nav>
+            <h3 class="text-muted">barbaric!</h3>
+        </div>
 
-<form>
-    <input type="text">
-</form>
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="row">
+                        <button type="button" class="btn btn-info btn-block">Attack</button>
+                    </div>
+                    <div class="row">
+                        <button type="button" class="btn btn-info btn-block">Dodge</button>
+                    </div>
+                    <div class="row">
+                        <button type="button" class="btn btn-info btn-block">Use Item</button>
+                    </div>
+                    <div class="row">
+                        <button type="button" class="btn btn-info btn-block">Random</button>
+                    </div>
+                </div>
+
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-3">
+                    <h4>Hero 1</h4>
+                    <p>Some stats</p>
+                    <p>Some stats</p>
+                    <p>Some stats</p>
+                </div>
+                <div class="col-lg-3 right">
+                    <h4>Hero 2</h4>
+                    <p>Some stats</p>
+                    <p>Some stats</p>
+                    <p>Some stats</p>
+                </div>
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <small>a log of text or something</small>
+                    <small>a log of text or something</small>
+                    <small>a log of text or something</small>
+                    <small>a log of text or something</small>
+                    <small>a log of text or something</small>
+                    <small>a log of text or something</small>
+                </div>
+            </div>
+            <!--<h1>Jumbotron heading</h1>-->
+            <!--<p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>-->
+            <!--<p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>-->
+        </div>
+
+
+
+        <footer class="footer">
+            <p>&copy; 2016 real dedicated</p>
+        </footer>
+
+    </div> <!-- /container -->
+
+
 <p class="message"></p>
 </body>
 </html>
