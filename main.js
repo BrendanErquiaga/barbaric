@@ -1,10 +1,11 @@
+"use strict";
 
 function rampage(){
-    $('.message').text("rampage!");
+    runTests();
 }
 
 $(document).ready(function() {
-    requirejs(['scripts/people'], function() {
+    requirejs(['scripts/utils','scripts/mixins','scripts/people','scripts/items','scripts/combat','scripts/screen-output','scripts/testing'], function() {
         rampage();
     });
 });
