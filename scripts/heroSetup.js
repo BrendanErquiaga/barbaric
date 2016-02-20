@@ -16,7 +16,7 @@ function heroSetup(){
 
 function loadHeroes(){
     heroes.push(conan,gandalf,deadpool,snape,hercules,spiderman);
-    //heroes.push(conan);
+    //heroes.push(snape,hercules);
 }
 
 function getTwoHeroes(){
