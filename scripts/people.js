@@ -1,12 +1,12 @@
 "use strict";
 
-function Human(name, age, description, hp, stats) {
-    var equipment;
+function Human(name, title, hp, stats) {
+    var equipment,
+        name;
 
     var humanState = {
                 name: name,
-                age: age,
-                description: description,
+                title: title,
                 equipment: []
                 };
 

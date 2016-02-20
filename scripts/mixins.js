@@ -2,6 +2,11 @@
 
 var canBeIdentifiedByName = function canBeIdentifiedByName(state) {
   return {
+    changeName: function(newName){
+        if(newName != undefined){
+            state.name = newName;
+        }
+    },
     toString: function toString() {
       return state.name;
     }
@@ -64,7 +69,8 @@ var hasHealth = function hasHealth(state, hp) {
 
 var defaultStatValue = 0;
 var hasStats = function hasStats(state, newStats) {
-    var charisma = newStats.charisma || newStats.default || defaultStatValue,
+    var stats = newStats,
+        charisma = newStats.charisma || newStats.default || defaultStatValue,
         constitution = newStats.constitution || newStats.default ||defaultStatValue,
         dexterity = newStats.dexterity || newStats.default ||defaultStatValue,
         intelligence = newStats.intelligence || newStats.default ||defaultStatValue,
@@ -72,6 +78,7 @@ var hasStats = function hasStats(state, newStats) {
         wisdom = newStats.wisdom || newStats.default ||defaultStatValue;
 
     return {
+        get stats() { return stats; },
         get charisma() { return charisma; },
         set charisma(value) { charisma = value; },
 
