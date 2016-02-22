@@ -13,6 +13,14 @@ var canBeIdentifiedByName = function canBeIdentifiedByName(state) {
   };
 };
 
+var canBeIdentifiedByTitle = function canBeIdentifiedByTitle(state){
+    return {
+        fullName: function toString(){
+            return state.name + ', ' + state.title;
+        }
+    }
+}
+
 var canEquipEquipment = function canEquipEquipment(state){
     return {
         dropEquipment: function dropEquipment(itemToDrop){
