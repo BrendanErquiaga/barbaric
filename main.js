@@ -4,9 +4,36 @@ var hero1,
     hero2;
 
 function setHeroData(){
-    $('#hero1_name').text(hero1.fullName);
-    $('#hero2_name').text(hero2.fullName);
+    setHeroFields(hero1,1);
+    setHeroFields(hero2,2);
 }
+
+function setHeroFields(heroToUse, heroNumber) {
+    var heroDiv;
+
+    if(heroNumber === 1){
+        heroDiv = '#hero1_div';
+    } else {
+        heroDiv = '#hero2_div';
+    }
+
+    //Name
+    $(heroDiv + ' .hero_name').text(heroToUse.fullName);
+
+    //Stats
+    $(heroDiv + ' .hero_cha').text(heroToUse.charisma);
+    $(heroDiv + ' .hero_con').text(heroToUse.constitution);
+    $(heroDiv + ' .hero_dex').text(heroToUse.dexterity);
+    $(heroDiv + ' .hero_int').text(heroToUse.intelligence);
+    $(heroDiv + ' .hero_str').text(heroToUse.strength);
+    $(heroDiv + ' .hero_wis').text(heroToUse.wisdom);
+
+    //Info
+    $(heroDiv + ' .hero_hp').text(heroToUse.healthStatus);
+//     $(heroDiv + ' .hero_wis').text(heroToUse.fullName);
+//     $(heroDiv + ' .hero_wis').text(heroToUse.fullName);
+}
+
 
 function rampage(){
     runTests();
