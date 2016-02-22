@@ -4,8 +4,8 @@ var hero1,
     hero2;
 
 function setHeroData(){
-    $('#hero1_name').text(hero1);
-    $('#hero2_name').text(hero2);
+    $('#hero1_name').text(hero1.fullName);
+    $('#hero2_name').text(hero2.fullName);
 }
 
 function rampage(){
