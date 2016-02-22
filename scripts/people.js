@@ -7,7 +7,7 @@ function Human(name, title, hp, stats) {
     var humanState = {
                 name: name,
                 title: title,
-                equipment: []
+                equipment: [new Weapon('Fists', 'Bare-Knuckled Hands', '5', {})]
                 };
 
     return Object.assign(humanState,

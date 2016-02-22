@@ -30,8 +30,10 @@ function setHeroFields(heroToUse, heroNumber) {
 
     //Info
     $(heroDiv + ' .hero_hp').text(heroToUse.healthStatus);
-//     $(heroDiv + ' .hero_wis').text(heroToUse.fullName);
-//     $(heroDiv + ' .hero_wis').text(heroToUse.fullName);
+
+    var weapon = heroToUse.firstItemOfType('weapon');
+    $(heroDiv + ' .hero_weapon').text(weapon);
+    $(heroDiv + ' .hero_weaponInfo').text(weapon.description);
 }
 
 

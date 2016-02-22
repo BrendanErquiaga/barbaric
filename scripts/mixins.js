@@ -39,6 +39,24 @@ var canEquipEquipment = function canEquipEquipment(state){
 
             state.equipment.push(itemToEquip);
             console.log(state + ' equipped the ' + itemToEquip);
+        },
+        itemInSlot: function itemInSlot(slot) {
+            for(var i = 0; i < state.equipment.length; i++){
+                if(state.equipment[i].slot == slot){
+                    return state.equipment[i];
+                }
+            }
+
+            return 'Empty';
+        },
+        firstItemOfType: function firstItemOfType(itemType){
+            for(var i = 0; i < state.equipment.length; i++){
+                if(state.equipment[i].type == itemType){
+                    return state.equipment[i];
+                }
+            }
+
+            return '';
         }
     };
 };
