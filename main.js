@@ -47,7 +47,8 @@ $(document).ready(function() {
     requirejs(['scripts/utils','scripts/mixins',
                'scripts/people','scripts/items',
                'scripts/combat','scripts/screen-output',
-               'scripts/testing','scripts/heroSetup'], function() {
+               'scripts/testing','scripts/itemSetup',
+               'scripts/heroSetup'], function() {
         rampage();
     });
 });

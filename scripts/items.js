@@ -50,3 +50,10 @@ function Weapon(name, description, damage, stats){
     Legs
     Feet
 */
+
+/* Damage Object
+    Min: Minimum Amount of Damage
+    Max: Maximum Amoumt of Damage
+    Crit: Crit Chance
+    Scale: Stat which helps scale damage
+*/
