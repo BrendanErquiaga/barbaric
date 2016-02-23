@@ -3,6 +3,13 @@
 var hero1,
     hero2;
 
+function rampage(){
+    runTests();
+    heroSetup();
+    setHeroData();
+    catchInput();
+}
+
 function setHeroData(){
     setHeroFields(hero1,1);
     setHeroFields(hero2,2);
@@ -34,13 +41,15 @@ function setHeroFields(heroToUse, heroNumber) {
     var weapon = heroToUse.firstItemOfType('weapon');
     $(heroDiv + ' .hero_weapon').text(weapon);
     $(heroDiv + ' .hero_weaponInfo').text(weapon.description);
+    $(heroDiv + ' .hero_weaponDamage').text(weapon.damage.min + '-' + weapon.damage.max);
 }
 
+function catchInput(){
 
-function rampage(){
-    runTests();
-    heroSetup();
-    setHeroData();
+    $('#heroAttackButton').on('click', function () {
+        hero1.weaponAttack(hero2, hero1.firstItemOfType('weapon'));
+    })
+
 }
 
 $(document).ready(function() {
@@ -48,7 +57,7 @@ $(document).ready(function() {
                'scripts/people','scripts/items',
                'scripts/combat','scripts/screen-output',
                'scripts/testing','scripts/itemSetup',
-               'scripts/heroSetup'], function() {
+               'scripts/heroSetup', 'scripts/bootstrap'], function() {
         rampage();
     });
 });

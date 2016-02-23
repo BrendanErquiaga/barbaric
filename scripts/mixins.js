@@ -159,6 +159,13 @@ var canAttack = function canAttack(state) {
     return {
         attack: function(target, damage) {
             target.currentHP -= damage;
+        },
+        weaponAttack: function(target, weapon){
+            var weaponDamage = weapon.getWeaponDamage();
+
+            console.log(state + ' attacks ' + target + ' with ' + weapon + ' for ' + weaponDamage);
+
+            target.currentHP -= weaponDamage;
         }
     }
 }

@@ -29,8 +29,12 @@ function Equipment(name, description, type, slot, stats) {
 
 function Weapon(name, description, damage, stats){
     var weaponState = {
-        damage:damage
-    }
+        damage:damage,
+
+        getWeaponDamage: function (){
+            return getRandomInt(damage.min, damage.max + 1);
+        }
+    };
 
     return Object.assign(weaponState, new Equipment(name, description, 'weapon','hands', stats));
 }
