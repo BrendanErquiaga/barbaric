@@ -41,7 +41,7 @@ function getRandomHero(){
 }
 
 function setDarkHero(hero){
-    var newHero = new Human('Evil ' + hero.name, hero.title, hero.maxHP, hero.stats);
+    var newHero = new Human('Evil ' + hero.name, hero.title, hero.baseHP, hero.stats);
     newHero.equipment = hero.equipment;
     return newHero;
 }

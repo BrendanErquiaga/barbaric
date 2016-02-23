@@ -13,9 +13,8 @@ function Human(name, title, hp, stats) {
     return Object.assign(humanState,
                canBeIdentifiedByName(humanState),
                canBeIdentifiedByTitle(humanState),
-               hasHealth(humanState, hp),
                hasStats(humanState, stats),
-               hasHealthWithStats(humanState),
+               hasHealthWithStats(humanState,hp),
                canEquipEquipment(humanState),
                canAttack(humanState));
 }
