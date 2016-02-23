@@ -9,14 +9,16 @@ var snape = new Human('Snape', 'The Deceiver', 50, {default: 10, charisma: 15, i
 var hercules = new Human('Hercules', 'The Demigod', 75, {default: 10, strength: 20, intelligence: 5});
 var spiderman = new Human('Spiderman', 'The Webslinger', 40, {default: 10, dexterity: 15, strength: 13});
 
+conan.equip(theAtlanean);
+
 function heroSetup(){
     loadHeroes();
     getTwoHeroes();
 }
 
 function loadHeroes(){
-    heroes.push(conan,gandalf,deadpool,snape,hercules,spiderman);
-    //heroes.push(snape,hercules);
+    //heroes.push(conan,gandalf,deadpool,snape,hercules,spiderman);
+    heroes.push(conan);
 }
 
 function getTwoHeroes(){
@@ -24,8 +26,11 @@ function getTwoHeroes(){
     hero2 = getRandomHero();
 
     if(hero1.name === hero2.name){
-
-        setDarkHero(hero2);
+        if(getRandomInt(0,2) === 1){
+            hero1 = setDarkHero(hero1);
+        } else {
+            hero2 = setDarkHero(hero2);
+        }        
     }
 }
 
@@ -37,5 +42,6 @@ function getRandomHero(){
 
 function setDarkHero(hero){
     var newHero = new Human('Evil ' + hero.name, hero.title, hero.maxHP, hero.stats);
-    hero2 = newHero;
+    newHero.equipment = hero.equipment;
+    return newHero;
 }

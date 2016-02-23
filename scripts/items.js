@@ -15,7 +15,6 @@ function ItemWithStats(name, description, type, stats) {
   var state = {};
 
   return Object.assign(state, hasStats(state, stats), new Item(name, description, type));
-
 }
 
 function Equipment(name, description, type, slot, stats) {
@@ -27,10 +26,14 @@ function Equipment(name, description, type, slot, stats) {
   return Object.assign(equipmentState, new ItemWithStats(name, description, type, stats));
 }
 
-function Weapon(name, description, damage, stats){
+function Weapon(name, description, attackInfo, stats){
     var weaponState = {
-        damage:damage
-    }
+        attackInfo:attackInfo,
+
+        getWeaponDamage: function (){
+            return getRandomInt(attackInfo.min, attackInfo.max + 1);
+        }
+    };
 
     return Object.assign(weaponState, new Equipment(name, description, 'weapon','hands', stats));
 }
@@ -49,4 +52,11 @@ function Weapon(name, description, damage, stats){
     Waist
     Legs
     Feet
+*/
+
+/* Damage Object
+    Min: Minimum Amount of Damage
+    Max: Maximum Amoumt of Damage
+    Crit: Crit Chance
+    Scale: Stat which helps scale damage
 */

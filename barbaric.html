@@ -22,17 +22,22 @@
         <div class="well">
             <div class="row">
                 <div class="col-lg-2">
-                    <div class="row">
-                        <button type="button" class="btn btn-info btn-block">Attack</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn btn-info btn-block">Dodge</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn btn-info btn-block">Use Item</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn btn-info btn-block">Random</button>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <button type="button" id="heroAttackButton" class="btn btn-info btn-block">Attack</button>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <button type="button" id="heroDodgeButton" class="btn btn-info btn-block">Dodge</button>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <button type="button" id="heroUseItemButton" class="btn btn-info btn-block">Use Item</button>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <button type="button" id="heroRandomActionButton" class="btn btn-info btn-block">Random</button>
+                        </div>
                     </div>
                 </div>
 
@@ -49,8 +54,9 @@
                         </div>
                         <div class="hero_info col-lg-6">
                             <p>HP: <span class="hero_hp">100</span></p>
-                            <p>Weapon: <span class="hero_weapon">weapon name</span></p>
+                            <p><span class="hero_weapon">weapon name</span></p>
                             <p><span class="hero_weaponInfo">100</span></p>
+                            <p><span class="hero_weaponDamage">00-99</span></p>
                         </div>
                     </div>
                 </div>
@@ -59,8 +65,9 @@
                     <div class="row">
                         <div class="hero_info col-lg-6 col-lg-offset-2">
                             <p>HP: <span class="hero_hp">100</span></p>
-                            <p>Weapon: <span class="hero_weapon">weapon name</span></p>
-                            <p><span class="hero_weaponInfo">100</span></p>
+                            <p><span class="hero_weapon">weapon name</span></p>
+                            <p><span class="hero_weaponInfo">info</span></p>
+                            <p><span class="hero_weaponDamage">00-99</span></p>
                         </div>
                         <div class="hero_stats col-lg-4">
                             <p>CHA: <span class="hero_cha">99</span></p>

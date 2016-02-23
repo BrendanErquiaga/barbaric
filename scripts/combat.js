@@ -69,6 +69,14 @@ function calculateAttack(target, damage, critChance) {
              hitStatus: hitStatus }
 }
 
+function attemptToAttack(attacker, target) {
+    var attackerWeapon = attacker.weapon();
+    var attackStatus = calculateAttack(target, attackerWeapon.getWeaponDamage(), attackerWeapon.attackInfo.crit);
+
+    console.log('Attack Status: Dmg: ' + attackStatus.damage + ' Hit: ' + attackStatus.hitStatus);
+    attacker.attack(target, attackStatus.damage);
+}
+
 
 
 
