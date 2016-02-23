@@ -15,7 +15,6 @@ function ItemWithStats(name, description, type, stats) {
   var state = {};
 
   return Object.assign(state, hasStats(state, stats), new Item(name, description, type));
-
 }
 
 function Equipment(name, description, type, slot, stats) {
@@ -27,12 +26,12 @@ function Equipment(name, description, type, slot, stats) {
   return Object.assign(equipmentState, new ItemWithStats(name, description, type, stats));
 }
 
-function Weapon(name, description, damage, stats){
+function Weapon(name, description, attackInfo, stats){
     var weaponState = {
-        damage:damage,
+        attackInfo:attackInfo,
 
         getWeaponDamage: function (){
-            return getRandomInt(damage.min, damage.max + 1);
+            return getRandomInt(attackInfo.min, attackInfo.max + 1);
         }
     };
 

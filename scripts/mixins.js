@@ -57,6 +57,9 @@ var canEquipEquipment = function canEquipEquipment(state){
             }
 
             return '';
+        },
+        weapon: function weapon(){
+            return state.firstItemOfType('weapon');
         }
     };
 };
@@ -70,11 +73,12 @@ var hasHealth = function hasHealth(state, hp) {
         set currentHP(value) { currentHP = value;},
         get maxHP() { return maxHP; },
         set maxHP(value) { maxHP = value;},
-
+        healthPercentage: function healthPercentage(){
+            return state.currentHP / state.maxHP;
+        },
         healthStatus: function healthStatus() {
-            var healthPercentage = state.currentHP / state.maxHP;
-
-            console.log('Checking ' + state +"'s HP: "  + currentHP + '/' + maxHP + '=' + healthPercentage);
+            var healthPercentage = state.healthPercentage();
+            console.log('Checking ' + state +"'s HP: "  + state.currentHP + '/' + state.maxHP + '=' + healthPercentage);
 
             if(healthPercentage == 1){
                 return 'Full HP';
@@ -93,10 +97,46 @@ var hasHealth = function hasHealth(state, hp) {
     };
 };
 
-var hasHealthWithStats = function hasHealthWithStats(state){
-    return{
-        get modifiedCurrentHP() { return state.currentHP + (state.currentHP * state.constitutionModifier)},
-        get modifiedMaxHP() { return state.maxHP + (state.maxHP * state.constitutionModifier);}
+var hasHealthWithStats = function hasHealthWithStats(state, hp){
+    var currentHP = hp,
+            maxHP = hp,
+            baseHP = hp;
+
+    return {
+        get baseHP() { return baseHP; },
+        get currentHP() {
+            return currentHP + (currentHP * state.constitutionModifier); 
+        },
+        set currentHP(value) { 
+            currentHP = value;
+        },
+        get maxHP() {
+            return maxHP + (maxHP * state.constitutionModifier); 
+        },
+        set maxHP(value) {
+            maxHP = value;
+        },
+        healthPercentage: function healthPercentage(){
+            return state.currentHP / state.maxHP;
+        },
+        healthStatus: function healthStatus() {
+            var healthPercentage = state.healthPercentage();
+            console.log('Checking ' + state +"'s HP: "  + state.currentHP + '/' + state.maxHP + '=' + healthPercentage);
+
+            if(healthPercentage == 1){
+                return 'Full HP';
+            } else if(healthPercentage >= 0.75){
+                return 'Healthy';
+            } else if(healthPercentage >= 0.5){
+                return 'Injured';
+            } else if(healthPercentage >= 0.25){
+                return 'Grievously Injured';
+            } else if(healthPercentage > 0){
+                return 'Mortally Injured';
+            } else {
+                return 'Dead';
+            }
+        }
     };
 };
 
