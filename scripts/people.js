@@ -15,5 +15,6 @@ function Human(name, title, hp, stats) {
                canBeIdentifiedByTitle(humanState),
                hasHealth(humanState, hp),
                hasStats(humanState, stats),
+               hasHealthWithStats(humanState),
                canEquipEquipment(humanState));
 }

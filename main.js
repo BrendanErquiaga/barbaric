@@ -29,7 +29,7 @@ function setHeroFields(heroToUse, heroNumber) {
     $(heroDiv + ' .hero_wis').text(heroToUse.wisdom);
 
     //Info
-    $(heroDiv + ' .hero_hp').text(heroToUse.healthStatus);
+    $(heroDiv + ' .hero_hp').text(heroToUse.modifiedCurrentHP + '/' + heroToUse.modifiedMaxHP);
 
     var weapon = heroToUse.firstItemOfType('weapon');
     $(heroDiv + ' .hero_weapon').text(weapon);

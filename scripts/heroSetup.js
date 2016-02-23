@@ -2,12 +2,12 @@
 
 var heroes = [];
 
-var conan = new Human('Conan', 'The Barbarian', 100, {default: 10, strength: 15, constitution: 13});
-var gandalf = new Human('Gandalf', 'The Grey', 75, {default: 10, intelligence: 15, wisdom: 13});
-var deadpool = new Human('Deadpool', 'The Merc With The Mouth', 500, {default: 10, constitution: 15, dexterity: 13});
-var snape = new Human('Snape', 'The Deceiver', 75, {default: 10, charisma: 15, intelligence: 13});
-var hercules = new Human('Hercules', 'The Demigod', 150, {default: 10, strength: 20, intelligence: 5});
-var spiderman = new Human('Spiderman', 'The Webslinger', 150, {default: 10, dexterity: 15, strength: 13});
+var conan = new Human('Conan', 'The Barbarian', 80, {default: 10, strength: 15, constitution: 13});
+var gandalf = new Human('Gandalf', 'The Grey', 55, {default: 10, intelligence: 15, wisdom: 13});
+var deadpool = new Human('Deadpool', 'The Merc With The Mouth', 200, {default: 10, constitution: 15, dexterity: 13});
+var snape = new Human('Snape', 'The Deceiver', 50, {default: 10, charisma: 15, intelligence: 13});
+var hercules = new Human('Hercules', 'The Demigod', 75, {default: 10, strength: 20, intelligence: 5});
+var spiderman = new Human('Spiderman', 'The Webslinger', 40, {default: 10, dexterity: 15, strength: 13});
 
 function heroSetup(){
     loadHeroes();

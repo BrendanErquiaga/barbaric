@@ -93,7 +93,15 @@ var hasHealth = function hasHealth(state, hp) {
     };
 };
 
-var defaultStatValue = 0;
+var hasHealthWithStats = function hasHealthWithStats(state){
+    return{
+        get modifiedCurrentHP() { return state.currentHP + (state.currentHP * state.constitutionModifier)},
+        get modifiedMaxHP() { return state.maxHP + (state.maxHP * state.constitutionModifier);}
+    };
+};
+
+var defaultStatValue = 0, 
+    defaultStatModifierDivider = 10;
 var hasStats = function hasStats(state, newStats) {
     var stats = newStats,
         charisma = newStats.charisma || newStats.default || defaultStatValue,
@@ -105,22 +113,29 @@ var hasStats = function hasStats(state, newStats) {
 
     return {
         get stats() { return stats; },
+
         get charisma() { return charisma; },
+        get charismaModifier() { return statModifier(charisma); },        
         set charisma(value) { charisma = value; },
 
         get constitution() { return constitution; },
+        get constitutionModifier() { return statModifier(constitution); }, 
         set constitution(value) { constitution = value; },
 
         get dexterity() { return dexterity; },
+        get dexterityModifier() { return statModifier(dexterity); }, 
         set dexterity(value) { dexterity = value},
 
         get intelligence() { return intelligence; },
+        get intelligenceModifier() { return statModifier(intelligence); }, 
         set intelligence(value) { intelligence = value; },
 
         get strength() { return strength; },
+        get strengthModifier() { return statModifier(strength); }, 
         set strength(value) { strength = value; },
 
         get wisdom() { return wisdom; },
+        get wisdomModifier() { return statModifier(wisdom); }, 
         set wisdom(value) { wisdom = value; },
 
         statString: function() {
@@ -130,8 +145,14 @@ var hasStats = function hasStats(state, newStats) {
                 'Int: ' + state.intelligence + ',' +
                 'Str: ' + state.strength + ',' +
                 'Wis: ' + state.wisdom);
-        }
+        }        
     };
+};
+
+function statModifier(stat, modifierDivider){
+    var dividerToUse = modifierDivider || defaultStatModifierDivider;
+
+    return stat / dividerToUse;
 };
 
 var canAttack = function canAttack(state) {
