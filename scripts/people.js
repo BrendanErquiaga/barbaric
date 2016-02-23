@@ -1,18 +1,20 @@
 "use strict";
 
-function Human(name, age, description, hp, stats) {
-    var equipment;
+function Human(name, title, hp, stats) {
+    var equipment,
+        name;
 
     var humanState = {
                 name: name,
-                age: age,
-                description: description,
-                equipment: []
+                title: title,
+                equipment: [new Weapon('Fists', 'Bare-Knuckled Hands', '5', {})]
                 };
 
     return Object.assign(humanState,
                canBeIdentifiedByName(humanState),
+               canBeIdentifiedByTitle(humanState),
                hasHealth(humanState, hp),
                hasStats(humanState, stats),
+               hasHealthWithStats(humanState),
                canEquipEquipment(humanState));
 }
