@@ -24,7 +24,7 @@ var canBeIdentifiedByTitle = function canBeIdentifiedByTitle(state){
 var canEquipEquipment = function canEquipEquipment(state){
     return {
         dropEquipment: function dropEquipment(itemToDrop){
-            console.log(state + ' dropped ' + itemToDrop + ' ...');
+            //console.log(state + ' dropped ' + itemToDrop + ' ...');
             var index = state.equipment.indexOf(itemToDrop);
             state.equipment.splice(index -1, 1);
         },
