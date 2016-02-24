@@ -8,5 +8,7 @@
 
 function runTests(){
 
-
+	// for(var i = 1; i <= 101; i++){
+	// 	console.log('Rolled ' + i + ' ' + calculateHitStatus(conan, i, 10));
+	// }
 }

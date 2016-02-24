@@ -45,10 +45,9 @@ function updateHeroFields(heroToUse, heroNumber) {
     //$(heroDiv + ' .hero_hp').text(heroToUse.modifiedCurrentHP + '/' + heroToUse.modifiedMaxHP);
     document.querySelector(heroDiv + ' .hero_hp').textContent = heroToUse.currentHP + '/' + heroToUse.maxHP;
 
-    var weapon = heroToUse.weapon();
-    document.querySelector(heroDiv + ' .hero_weapon').textContent = weapon;
-    document.querySelector(heroDiv + ' .hero_weaponInfo').textContent = weapon.description;
-    document.querySelector(heroDiv + ' .hero_weaponDamage').textContent = weapon.attackInfo.min + '-' + weapon.attackInfo.max;
+    document.querySelector(heroDiv + ' .hero_weapon').textContent = heroToUse.weapon();
+    document.querySelector(heroDiv + ' .hero_weaponInfo').textContent = heroToUse.weapon().description;
+    document.querySelector(heroDiv + ' .hero_weaponDamage').textContent = heroToUse.weapon().attackInfo.min + '-' + heroToUse.weapon().attackInfo.max;
 }
 
 function catchInput(){
