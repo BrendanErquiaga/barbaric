@@ -75,6 +75,7 @@ function attemptToAttack(attacker, target) {
 
     console.log('Attack Status: Dmg: ' + attackStatus.damage + ' Hit: ' + attackStatus.hitStatus);
     attacker.attack(target, attackStatus.damage);
+    return attackStatus;
 }
 
 

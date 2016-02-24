@@ -29,30 +29,32 @@ function updateHeroFields(heroToUse, heroNumber) {
     }
 
     //Name
-    $(heroDiv + ' .hero_name').text(heroToUse.fullName);
+    //$(heroDiv + ' .hero_name').text(heroToUse.fullName);
+    document.querySelector(heroDiv + '> .hero_name').textContent = heroToUse.fullName();
 
     //Stats
-    $(heroDiv + ' .hero_cha').text(heroToUse.charisma);
-    $(heroDiv + ' .hero_con').text(heroToUse.constitution);
-    $(heroDiv + ' .hero_dex').text(heroToUse.dexterity);
-    $(heroDiv + ' .hero_int').text(heroToUse.intelligence);
-    $(heroDiv + ' .hero_str').text(heroToUse.strength);
-    $(heroDiv + ' .hero_wis').text(heroToUse.wisdom);
+    //console.log("HN: " + heroNumber);
+    document.querySelector(heroDiv + ' .hero_cha').textContent = heroToUse.charisma;
+    document.querySelector(heroDiv + ' .hero_con').textContent = heroToUse.constitution;
+    document.querySelector(heroDiv + ' .hero_dex').textContent = heroToUse.dexterity;
+    document.querySelector(heroDiv + ' .hero_int').textContent = heroToUse.intelligence;
+    document.querySelector(heroDiv + ' .hero_str').textContent = heroToUse.strength;
+    document.querySelector(heroDiv + ' .hero_wis').textContent = heroToUse.wisdom;
 
     //Info
     //$(heroDiv + ' .hero_hp').text(heroToUse.modifiedCurrentHP + '/' + heroToUse.modifiedMaxHP);
-    $(heroDiv + ' .hero_hp').text(heroToUse.currentHP + '/' + heroToUse.maxHP);
+    document.querySelector(heroDiv + ' .hero_hp').textContent = heroToUse.currentHP + '/' + heroToUse.maxHP;
 
     var weapon = heroToUse.weapon();
-    $(heroDiv + ' .hero_weapon').text(weapon);
-    $(heroDiv + ' .hero_weaponInfo').text(weapon.description);
-    $(heroDiv + ' .hero_weaponDamage').text(weapon.attackInfo.min + '-' + weapon.attackInfo.max);
+    document.querySelector(heroDiv + ' .hero_weapon').textContent = weapon;
+    document.querySelector(heroDiv + ' .hero_weaponInfo').textContent = weapon.description;
+    document.querySelector(heroDiv + ' .hero_weaponDamage').textContent = weapon.attackInfo.min + '-' + weapon.attackInfo.max;
 }
 
 function catchInput(){
 
     $('#heroAttackButton').on('click', function () {
-        attemptToAttack(hero1, hero2);
+        addAttackToLog(attemptToAttack(hero1, hero2));
         playerActionTaken();
     })
 
