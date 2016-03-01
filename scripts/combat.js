@@ -33,7 +33,7 @@ function calculateHitStatus(target, attackRoll, critChance) {
         return 'parry';
     } else if (attackRoll < critFloor){
         return 'normal'
-    } else if (attackRoll === featCeiling){
+    } else if (attackRoll >= featCeiling){
         return 'feat';
     } else {
         return 'crit';
@@ -66,15 +66,17 @@ function calculateDamage(damage, hitStatus) {
 function calculateAttack(target, damage, critChance) {
     var hitStatus = calculateHitStatus(target, rollDie(101), critChance);
     return { damage: calculateDamage(damage, hitStatus),
-             hitStatus: hitStatus }
+             hitStatus: hitStatus,
+             target: target }
 }
 
 function attemptToAttack(attacker, target) {
     var attackerWeapon = attacker.weapon();
     var attackStatus = calculateAttack(target, attackerWeapon.getWeaponDamage(), attackerWeapon.attackInfo.crit);
 
-    console.log('Attack Status: Dmg: ' + attackStatus.damage + ' Hit: ' + attackStatus.hitStatus);
+    //console.log('Attack Status: Dmg: ' + attackStatus.damage + ' Hit: ' + attackStatus.hitStatus);
     attacker.attack(target, attackStatus.damage);
+    return attackStatus;
 }
 
 
