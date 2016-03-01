@@ -40,3 +40,38 @@ function addAttackToLog(attackStatus){
 	}
 	addMessage(messageToSend);
 }
+
+
+function drawPlayerButtons(){
+	switch(currentButtonMode){
+		case 'Default':
+			enableButtonGroup('default_player_buttons');
+			break;
+		case 'Attacking':
+			enableButtonGroup('attack_player_buttons');
+			break;
+		case 'Defending':
+			enableButtonGroup('defense_player_buttons');
+			break;
+		case 'Tricking':
+			enableButtonGroup('trickery_player_buttons');
+			break;			
+	}
+}
+
+function hideAllPlayerButtons(){
+	document.getElementById('default_player_buttons').classList.remove('hidden');
+	document.getElementById('attack_player_buttons').classList.remove('hidden');
+	document.getElementById('defense_player_buttons').classList.remove('hidden');
+	document.getElementById('trickery_player_buttons').classList.remove('hidden');
+
+	document.getElementById('default_player_buttons').classList.add('hidden');
+	document.getElementById('attack_player_buttons').classList.add('hidden');
+	document.getElementById('defense_player_buttons').classList.add('hidden');
+	document.getElementById('trickery_player_buttons').classList.add('hidden');
+}
+
+function enableButtonGroup(idOfButtonGroup){
+	hideAllPlayerButtons();
+	document.getElementById(idOfButtonGroup).classList.remove('hidden');
+}

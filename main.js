@@ -1,17 +1,19 @@
 "use strict";
 
 var hero1,
-    hero2;
+    hero2,
+    currentButtonMode = 'Default';
 
 function rampage(){
     runTests();
     heroSetup();
-    updateDisplay();
+    updateDisplay();    
     catchInput();
 }
 
 function updateDisplay(){
     updateHeroData();
+    drawPlayerButtons();
 }
 
 function updateHeroData(){
@@ -50,26 +52,6 @@ function updateHeroFields(heroToUse, heroNumber) {
     document.querySelector(heroDiv + ' .hero_weaponDamage').textContent = heroToUse.weapon().attackInfo.min + '-' + heroToUse.weapon().attackInfo.max;
 }
 
-function catchInput(){
-
-    $('#heroAttackButton').on('click', function () {
-        addAttackToLog(attemptToAttack(hero1, hero2));
-        playerActionTaken();
-    })
-
-    $('#heroDodgeButton').on('click', function () {
-        playerActionTaken();        
-    })
-
-    $('#heroUseItemButton').on('click', function () {
-        playerActionTaken();        
-    })
-
-    $('#heroRandomActionButton').on('click', function () {
-        playerActionTaken();
-    })
-}
-
 function playerActionTaken(){
     //Take AI Action
     updateDisplay();
@@ -80,7 +62,8 @@ $(document).ready(function() {
                'scripts/people','scripts/items',
                'scripts/combat','scripts/screen-output',
                'scripts/testing','scripts/itemSetup',
-               'scripts/heroSetup', 'scripts/bootstrap'], function() {
+               'scripts/heroSetup', 'scripts/bootstrap',
+               'scripts/input'], function() {
         rampage();
     });
 });
