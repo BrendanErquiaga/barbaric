@@ -97,10 +97,10 @@ var hasHealth = function hasHealth(state, hp) {
     };
 };
 
-var hasHealthWithStats = function hasHealthWithStats(state, hp){
+var hasHealthAndStats = function hasHealthAndStats(state, hp) {
     var currentHP = hp,
-            maxHP = hp,
-            baseHP = hp;
+        maxHP = hp,
+        baseHP = hp;
 
     return {
         get baseHP() { return baseHP; },
@@ -115,30 +115,9 @@ var hasHealthWithStats = function hasHealthWithStats(state, hp){
         },
         set maxHP(value) {
             maxHP = value;
-        },
-        healthPercentage: function healthPercentage(){
-            return state.currentHP / state.maxHP;
-        },
-        healthStatus: function healthStatus() {
-            var healthPercentage = state.healthPercentage();
-            console.log('Checking ' + state +"'s HP: "  + state.currentHP + '/' + state.maxHP + '=' + healthPercentage);
-
-            if(healthPercentage == 1){
-                return 'Full HP';
-            } else if(healthPercentage >= 0.75){
-                return 'Healthy';
-            } else if(healthPercentage >= 0.5){
-                return 'Injured';
-            } else if(healthPercentage >= 0.25){
-                return 'Grievously Injured';
-            } else if(healthPercentage > 0){
-                return 'Mortally Injured';
-            } else {
-                return 'Dead';
-            }
         }
-    };
-};
+    }
+}
 
 var defaultStatValue = 0, 
     defaultStatModifierDivider = 10;
@@ -209,3 +188,34 @@ var canAttack = function canAttack(state) {
         }
     }
 }
+
+var canUseAbilities = function canUseAbilities(state) {
+    return {
+        activateAbility: function(ability, target) {
+            ability.activate(target);
+
+            console.log("You sure activated that ability guy");
+        }
+    }
+}
+
+var canCastSpells = function canCastSpells(state) {
+    return {
+        castSpell: function(spell, target) {
+            if(state.mp >= spell.mp) {
+                spell.cast(target);
+                state.mp--;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+

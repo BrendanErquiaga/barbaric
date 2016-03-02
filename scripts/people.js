@@ -14,7 +14,29 @@ function Human(name, title, hp, stats) {
                canBeIdentifiedByName(humanState),
                canBeIdentifiedByTitle(humanState),
                hasStats(humanState, stats),
-               hasHealthWithStats(humanState,hp),
+               hasHealth(humanState,hp),
+               hasHealthAndStats(humanState,hp),
                canEquipEquipment(humanState),
                canAttack(humanState));
+}
+
+function AbilityUser(name, title, hp, stats, ability) {
+    var abilityUserState = {
+        ability: ability
+    };
+
+    return Object.assign(abilityUserState, 
+      new Human(name, title, hp, stats),
+      canUseAbilities(state));
+}
+
+function SpellCaster(name, title, hp, stats, mp, spell) {
+  var spellCasterState = { 
+    mp: mp, 
+    spell: spell
+  };
+
+  return Object.assign(spellCasterState,
+    new Human(name, title, hp, stats),
+      canCastSpells(state));
 }
