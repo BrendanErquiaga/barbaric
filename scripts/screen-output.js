@@ -77,6 +77,14 @@ function updateHeroFields(heroToUse, heroNumber) {
     document.querySelector(heroDiv + ' .hero_weaponDamage').textContent = heroToUse.weapon().attackInfo.min + '-' + heroToUse.weapon().attackInfo.max;
 }
 
+function updateCenterLog() {
+	var turnText = 'Your Turn';
+	if(!playerTurn){
+		turnText = 'Enemy Turn';
+	}
+	document.querySelector('#turnInfo').textContent = turnText;
+}
+
 
 function drawPlayerButtons(){
 	switch(currentButtonMode){

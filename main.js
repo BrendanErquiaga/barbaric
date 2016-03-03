@@ -2,7 +2,8 @@
 
 var hero1,
     hero2,
-    currentButtonMode = 'Default';
+    currentButtonMode = 'Default',
+    playerTurn = false;
 
 function rampage(){
     runTests();
@@ -13,13 +14,20 @@ function rampage(){
 
 function updateDisplay(){
     updateHeroData();
+    updateCenterLog();
     drawPlayerButtons();
 }
 
-
-
 function playerActionTaken(){
-    //Take AI Action
+    updateDisplay();
+    takeAIAction();
+}
+
+function takeAIAction() {
+    //Take Delay
+    //Display Delay
+    takeEnemyAction();
+    playerTurn = true;
     updateDisplay();
 }
 
@@ -29,7 +37,7 @@ $(document).ready(function() {
                'scripts/combat','scripts/screen-output',
                'scripts/testing','scripts/itemSetup',
                'scripts/heroSetup', 'scripts/bootstrap',
-               'scripts/input'], function() {
+               'scripts/input','scripts/ai'], function() {
         rampage();
     });
 });

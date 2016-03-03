@@ -14,6 +14,8 @@ conan.equip(theAtlanean);
 function heroSetup(){
     loadHeroes();
     getTwoHeroes();
+    determineStartingPlayer();
+    initAI();
 }
 
 function loadHeroes(){
@@ -44,4 +46,16 @@ function setDarkHero(hero){
     var newHero = new Human('Evil ' + hero.name, hero.title, hero.baseHP, hero.stats);
     newHero.equipment = hero.equipment;
     return newHero;
+}
+
+function determineStartingPlayer(){
+    var hero1Roll = rollDie(21),
+        hero2Roll = rollDie(21);
+
+    hero1Roll += hero1.dexterityModifier;
+    hero2Roll += hero2.dexterityModifier;
+
+    if(hero1Roll > hero2Roll){
+        playerTurn = true;
+    }
 }
