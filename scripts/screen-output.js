@@ -82,7 +82,7 @@ function updateCenterLog() {
 	if(!playerTurn){
 		turnText = 'Enemy Turn';
 	}
-	document.querySelector('#turnInfo').textContent = turnText;
+	document.querySelector('#turn_info').textContent = turnText;
 }
 
 
