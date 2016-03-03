@@ -25,7 +25,8 @@ var safeAttackTable = {
     missCeiling: 5,
     dodgeCap: 10,
     parryCap: 5,
-    featCeiling: 101
+    featCeiling: 101,
+    critChanceMultiplier: 0.5
 };
 
 var recklessAttackTable = {
@@ -33,8 +34,8 @@ var recklessAttackTable = {
     missCeiling: 20,
     dodgeCap: 20,
     parryCap: 20,
-    critChance: 20,
-    featCeiling: 98
+    featCeiling: 98,
+    critChanceMultiplier: 2
 };
 
 
@@ -65,11 +66,13 @@ function getAttackTableWithCrit(attackTable, critChance) {
         dodgeCap: attackTable.dodgeCap,
         parryCap: attackTable.parryCap,
         critChance: attackTable.critChance || 0,
+        critChanceMultiplier: attackTable.critChanceMultiplier || 1,
         featCeiling: attackTable.featCeiling
     }, 
     critToAdd = critChance || 0;
 
     tempAttackTable.critChance += critToAdd;
+    tempAttackTable.critChance *= tempAttackTable.critChanceMultiplier;
 
     return tempAttackTable;
 }
@@ -89,7 +92,7 @@ function getCalculatedAttackTable(target, attackTable) {
     tempAttackTable.parryCeiling = getHitStatusCeiling(target.strength, tempAttackTable.parryCap) + tempAttackTable.dodgeCeiling;//Calculat parry & adjust to account for miss + dodge
     tempAttackTable.critFloor = tempAttackTable.featCeiling - tempAttackTable.critChance;//Adjust crit floor to account for feats
 
-    //console.log(tempAttackTable);
+    console.log(tempAttackTable);
 
     return tempAttackTable;
 }
