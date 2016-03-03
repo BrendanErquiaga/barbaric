@@ -1,11 +1,6 @@
 "use strict";
 
-var fumbleCeiling = 1,//These numbers can't add up to more than 100 (though shold leave range for normal hits)
-    missCeiling = 10,
-    dodgeCap = 20,
-    parryCap = 20,
-    featCeiling = 100,
-    critMultiplier = 2,
+var critMultiplier = 2,
     featMultiplier = 10;
 
 /* Standard Attack Table
@@ -17,27 +12,71 @@ var fumbleCeiling = 1,//These numbers can't add up to more than 100 (though shol
     Crit Z-99 - Attacker Based
     Feat 100 (Insane Damage? Instant Kill?)
 */
-function calculateHitStatus(target, attackRoll, critChance) {
-    var dodgeCeiling = getHitStatusCeiling(target.dexterity,dodgeCap) + missCeiling;
-    var parryCeiling = getHitStatusCeiling(target.strength,parryCap) + dodgeCeiling;
-    var calculatedCritChance = critChance || 0;
-    var critFloor = featCeiling - calculatedCritChance;
+var standardAttackTable = {
+    fumbleCeiling: 1,
+    missCeiling: 9,
+    dodgeCap: 20,
+    parryCap: 20,
+    featCeiling: 100
+};
 
-    if(attackRoll <= fumbleCeiling){
+var safeAttackTable = {
+    fumbleCeiling: 0,
+    missCeiling: 5,
+    dodgeCap: 10,
+    parryCap: 5,
+    featCeiling: 101
+};
+
+var recklessAttackTable = {
+    fumbleCeiling: 5,
+    missCeiling: 20,
+    dodgeCap: 20,
+    parryCap: 20,
+    critChance: 20,
+    featCeiling: 98
+};
+
+
+function calculateHitStatus(target, attackRoll, attackTable) {
+    var calculatedMissCeiling = attackTable.fumbleCeiling + attackTable.missCeiling;
+    var calculatedDodgeCeiling = getHitStatusCeiling(target.dexterity, attackTable.dodgeCap) + calculatedMissCeiling;
+    var calculatedParryCeiling = getHitStatusCeiling(target.strength, attackTable.parryCap) + calculatedDodgeCeiling;
+    var calculatedCritChance = attackTable.critChance || 0;
+
+    var calculatedCritFloor = attackTable.featCeiling - calculatedCritChance;
+
+    if(attackRoll <= attackTable.fumbleCeiling){
         return 'fumble';
-    } else if (attackRoll <= missCeiling){
+    } else if (attackRoll <= calculatedMissCeiling){
         return 'miss';
-    } else if (attackRoll <= dodgeCeiling){
+    } else if (attackRoll <= calculatedDodgeCeiling){
         return 'dodge';
-    } else if (attackRoll <= parryCeiling){
+    } else if (attackRoll <= calculatedParryCeiling){
         return 'parry';
-    } else if (attackRoll < critFloor){
+    } else if (attackRoll < calculatedCritFloor){
         return 'normal'
-    } else if (attackRoll >= featCeiling){
+    } else if (attackRoll >= attackTable.featCeiling){
         return 'feat';
     } else {
         return 'crit';
     }
+}
+
+function getAttackTableWithCrit(attackTable, critChance) {
+    var tempAttackTable = {
+        fumbleCeiling: attackTable.fumbleCeiling,
+        missCeiling: attackTable.missCeiling,
+        dodgeCap: attackTable.dodgeCap,
+        parryCap: attackTable.parryCap,
+        critChance: attackTable.critChance || 0,
+        featCeiling: attackTable.featCeiling
+    }, 
+    critToAdd = critChance || 0;
+
+    tempAttackTable.critChance += critToAdd;
+
+    return tempAttackTable;
 }
 
 function getHitStatusCeiling(stat,cap){
@@ -63,16 +102,23 @@ function calculateDamage(damage, hitStatus) {
     }
 }
 
-function calculateAttack(target, damage, critChance) {
-    var hitStatus = calculateHitStatus(target, rollDie(101), critChance);
+function calculateAttack(target, damage, attackTable) {
+    var hitStatus = calculateHitStatus(target, rollDie(101), attackTable);
     return { damage: calculateDamage(damage, hitStatus),
              hitStatus: hitStatus,
              target: target }
 }
 
-function attemptToAttack(attacker, target) {
+function attemptToAttack(attacker, target, attackTable) {
+    var attackTableToUse = attackTable || standardAttackTable;
     var attackerWeapon = attacker.weapon();
-    var attackStatus = calculateAttack(target, attackerWeapon.getWeaponDamage(), attackerWeapon.attackInfo.crit);
+    attackTableToUse = getAttackTableWithCrit(attackTableToUse, attackerWeapon.attackInfo.crit);
+
+    var attackStatus = calculateAttack(target, 
+                       attackerWeapon.getWeaponDamage(), 
+                       attackTableToUse);
+
+    console.log(attackTableToUse);
 
     //console.log('Attack Status: Dmg: ' + attackStatus.damage + ' Hit: ' + attackStatus.hitStatus);
     attacker.attack(target, attackStatus.damage);
