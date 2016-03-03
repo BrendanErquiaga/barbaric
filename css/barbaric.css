@@ -14,3 +14,11 @@
 	margin-top: 10px;
 	color: #a3a3a3;
 }
+
+#player_buttons { 
+    margin-top: 10px;
+}
+
+.hidden {
+	display: none;
+}

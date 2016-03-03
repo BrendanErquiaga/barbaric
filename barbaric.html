@@ -22,22 +22,87 @@
         <div class="well">
             <div class="row">
                 <div class="col-lg-2">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <button type="button" id="heroAttackButton" class="btn btn-info btn-block">Attack</button>
+                    <div id="player_buttons" class="container-fluid">
+
+                        <!-- Default Buttons! -->
+                        <div id="default_player_buttons" class="hidden">
+                            <div  class="row">
+                                <button type="button" id="attackActionsButton" class="btn btn-danger btn-block">Attack</button>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <button type="button" id="defenseActionsButton" class="btn btn-info btn-block">Defense</button>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <button type="button" id="trickeryActionsButton" class="btn btn-success btn-block">Trickery</button>
+                            </div>
                         </div>
-                        <br>
-                        <div class="row">
-                            <button type="button" id="heroDodgeButton" class="btn btn-info btn-block">Dodge</button>
+
+                        <!-- Attack Buttons! -->
+                        <div id="attack_player_buttons" class="hidden">
+                            <div class="row">
+                                <button type="button" id="safeAttackButton" class="btn btn-danger btn-block">Safe Attack</button>
+                            </div>
+                            <br>
+                            <div  class="row">
+                                <button type="button" id="weaponAttackButton" class="btn btn-danger btn-block">Normal Attack</button>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <button type="button" id="recklessAttackButton" class="btn btn-danger btn-block">Reckless Attack</button>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <button type="button" class="backToDefaultButton btn btn-default btn-block" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span> Back
+                                </button>
+                            </div>
                         </div>
-                        <br>
-                        <div class="row">
-                            <button type="button" id="heroUseItemButton" class="btn btn-info btn-block">Use Item</button>
+
+                        <!-- Defense Buttons! -->
+                        <div id="defense_player_buttons" class="hidden">
+                            <div  class="row">
+                                <button type="button" id="parryButton" class="btn btn-info btn-block">Parry</button>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <button type="button" id="dodgeButton" class="btn btn-info btn-block">Dodge</button>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <button type="button" id="blockButton" class="btn btn-info btn-block">Block</button>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <button type="button" class="backToDefaultButton btn btn-default btn-block" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span> Back
+                                </button>
+                            </div>
                         </div>
-                        <br>
-                        <div class="row">
-                            <button type="button" id="heroRandomActionButton" class="btn btn-info btn-block">Random</button>
+
+                        <!-- Trickery Buttons! -->
+                        <div id="trickery_player_buttons" class="hidden">
+                            <div  class="row">
+                                <button type="button" id="confuseButton" class="btn btn-success btn-block">Confuse</button>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <button type="button" id="interruptButton" class="btn btn-success btn-block">Interrupt</button>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <button type="button" id="disarmButton" class="btn btn-success btn-block">Disarm</button>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <button type="button" class="backToDefaultButton btn btn-default btn-block" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span> Back
+                                </button>
+                            </div>
                         </div>
+
+
                     </div>
                 </div>
 
