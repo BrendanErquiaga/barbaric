@@ -68,7 +68,7 @@ function runTests(){
 //  console.log('My friend, ' + friend + ', lives in ' + friend.getHome());
 //  console.log('My Canadian friend, ' + canadianFriend + ', lives in ' + canadianFriend.getHome());
 
-    // for(var i = 1; i <= 100; i++){
-    //     console.log('Rolled ' + i + ' ' + calculateHitStatus(conan, i, getAttackTableWithCrit(recklessAttackTable,10)));
-    // }
+    for(var i = 1; i <= 100; i++){
+        console.log('Rolled ' + i + ' ' + calculateHitStatus(conan, i, getAttackTableWithCrit(recklessAttackTable,10)));
+    }
 }

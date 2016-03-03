@@ -39,24 +39,19 @@ var recklessAttackTable = {
 
 
 function calculateHitStatus(target, attackRoll, attackTable) {
-    var calculatedMissCeiling = attackTable.fumbleCeiling + attackTable.missCeiling;
-    var calculatedDodgeCeiling = getHitStatusCeiling(target.dexterity, attackTable.dodgeCap) + calculatedMissCeiling;
-    var calculatedParryCeiling = getHitStatusCeiling(target.strength, attackTable.parryCap) + calculatedDodgeCeiling;
-    var calculatedCritChance = attackTable.critChance || 0;
+    var calculatedAttackTable = getCalculatedAttackTable(target, attackTable);
 
-    var calculatedCritFloor = attackTable.featCeiling - calculatedCritChance;
-
-    if(attackRoll <= attackTable.fumbleCeiling){
+    if(attackRoll <= calculatedAttackTable.fumbleCeiling){
         return 'fumble';
-    } else if (attackRoll <= calculatedMissCeiling){
+    } else if (attackRoll <= calculatedAttackTable.missCeiling){
         return 'miss';
-    } else if (attackRoll <= calculatedDodgeCeiling){
+    } else if (attackRoll <= calculatedAttackTable.dodgeCeiling){
         return 'dodge';
-    } else if (attackRoll <= calculatedParryCeiling){
+    } else if (attackRoll <= calculatedAttackTable.parryCeiling){
         return 'parry';
-    } else if (attackRoll < calculatedCritFloor){
+    } else if (attackRoll < calculatedAttackTable.critFloor){
         return 'normal'
-    } else if (attackRoll >= attackTable.featCeiling){
+    } else if (attackRoll >= calculatedAttackTable.featCeiling){
         return 'feat';
     } else {
         return 'crit';
@@ -75,6 +70,26 @@ function getAttackTableWithCrit(attackTable, critChance) {
     critToAdd = critChance || 0;
 
     tempAttackTable.critChance += critToAdd;
+
+    return tempAttackTable;
+}
+
+function getCalculatedAttackTable(target, attackTable) {
+    var tempAttackTable = {
+        fumbleCeiling: attackTable.fumbleCeiling,
+        missCeiling: attackTable.missCeiling,
+        dodgeCap: attackTable.dodgeCap,
+        parryCap: attackTable.parryCap,
+        critChance: attackTable.critChance || 0,
+        featCeiling: attackTable.featCeiling
+    };
+
+    tempAttackTable.missCeiling = tempAttackTable.fumbleCeiling + tempAttackTable.missCeiling;//Adjust miss ceiling to account for fumble
+    tempAttackTable.dodgeCeiling = getHitStatusCeiling(target.dexterity, tempAttackTable.dodgeCap) + tempAttackTable.missCeiling;//Calculate dodge & adjust to account for miss
+    tempAttackTable.parryCeiling = getHitStatusCeiling(target.strength, tempAttackTable.parryCap) + tempAttackTable.dodgeCeiling;//Calculat parry & adjust to account for miss + dodge
+    tempAttackTable.critFloor = tempAttackTable.featCeiling - tempAttackTable.critChance;//Adjust crit floor to account for feats
+
+    //console.log(tempAttackTable);
 
     return tempAttackTable;
 }
@@ -118,7 +133,7 @@ function attemptToAttack(attacker, target, attackTable) {
                        attackerWeapon.getWeaponDamage(), 
                        attackTableToUse);
 
-    console.log(attackTableToUse);
+    //console.log(attackTableToUse);
 
     //console.log('Attack Status: Dmg: ' + attackStatus.damage + ' Hit: ' + attackStatus.hitStatus);
     attacker.attack(target, attackStatus.damage);
