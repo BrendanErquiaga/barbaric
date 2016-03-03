@@ -20,6 +20,7 @@ function updateDisplay(){
 
 function playerActionTaken(){
     updateDisplay();
+    playerTurn = false;
     takeAIAction();
 }
 

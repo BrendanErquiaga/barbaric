@@ -15,11 +15,11 @@
 }
 
 #combat_log .player {
-	color: grey;
+	color: #bfbfbf;
 }
 
-#combat_log .enemy {
-	color: red;
+#combat_log .ai {
+	color: #fa8072;
 }
 
 #player_buttons { 

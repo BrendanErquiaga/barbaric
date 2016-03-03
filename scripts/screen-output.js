@@ -19,27 +19,27 @@ function addAttackToLog(attackStatus){
 
 	if(!playerTurn){
 		attacker = target;
-		target = 'you';
+		target = 'You';
 	}
 
 	switch(attackStatus.hitStatus){
 		case 'dodge':
-			messageToSend += attackStatus.target + ' dodged!';
+			messageToSend += target + ' dodged!';
 			break;
 		case 'parry':
-			messageToSend += attackStatus.target + ' parried!';
+			messageToSend += target + ' parried!';
 			break;
 		case 'miss':
-			messageToSend += attacker + ' missed ' + attackStatus.target;
+			messageToSend += attacker + ' missed ' + target;
 			break;
 		case 'fumble':
 			messageToSend += attacker + ' fumbled oh no!';
 			break;
 		case 'normal':
-			messageToSend += attacker + ' hit ' + attackStatus.target + ' ' + attackStatus.damage + ' damage.';
+			messageToSend += attacker + ' hit ' + target + ', ' + attackStatus.damage + ' damage.';
 			break;
 		case 'crit':
-			messageToSend += attacker + ' crit ' + attackStatus.target + ' ' + attackStatus.damage + ' damage!';
+			messageToSend += attacker + ' crit ' + target + ', ' + attackStatus.damage + ' damage!';
 			break;
 		case 'feat':
 			messageToSend += attacker + ' performed an amazing attack! ' + attackStatus.damage + ' damage to ' + target + '!!!';
