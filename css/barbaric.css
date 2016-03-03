@@ -12,7 +12,14 @@
 	font-style: italic;
 	font-size: 12px;
 	margin-top: 10px;
-	color: #a3a3a3;
+}
+
+#combat_log .player {
+	color: grey;
+}
+
+#combat_log .enemy {
+	color: red;
 }
 
 #player_buttons { 
