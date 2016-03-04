@@ -1,44 +1,74 @@
 "use strict";
 
-var currentMessage = "";
+var currentCombatLogMessage = "";
 
-function createNewMessage(newMessage){
+function updateCenterLog() {
+	var turnText = 'Your Turn';
+	if(!playerTurn){
+		turnText = 'Enemy Turn';
+	}
+	document.querySelector('#turn_info').textContent = turnText;
+}
+
+function updateMessage(newMessage){
     //$('.message').html(newMessage);
     document.getElementById('combat_log').innerHTML = newMessage;
 }
 
 function addMessage(message){
-    currentMessage = message + "<br>" + currentMessage;
-    createNewMessage(currentMessage);
+    currentCombatLogMessage = getSpan() + message + "</span><br>" + currentCombatLogMessage;
+    updateMessage(currentCombatLogMessage);
 }
 
 function addAttackToLog(attackStatus){
-	var messageToSend = '';
+	var messageToSend = '',
+		attacker = 'You',
+		target = attackStatus.target;
+
+	if(!playerTurn){
+		attacker = hero2;
+		target = 'You';
+	}
 
 	switch(attackStatus.hitStatus){
 		case 'dodge':
-			messageToSend = attackStatus.target + ' dodged!';
+			messageToSend += target + ' dodged!';
 			break;
 		case 'parry':
-			messageToSend = attackStatus.target + ' parried!';
+			messageToSend += target + ' parried!';
 			break;
 		case 'miss':
-			messageToSend = 'You missed ' + attackStatus.target;
+			messageToSend += attacker + ' missed ' + target;
 			break;
 		case 'fumble':
-			messageToSend = 'You fumbled oh no!';
+			messageToSend += attacker + ' fumbled oh no!';
 			break;
 		case 'normal':
-			messageToSend = 'You hit ' + attackStatus.target + ' ' + attackStatus.damage + ' damage.';
+			messageToSend += attacker + ' hit ' + target + ', ' + attackStatus.damage + ' damage';
 			break;
 		case 'crit':
-			messageToSend = 'You crit ' + attackStatus.target + ' ' + attackStatus.damage + ' damage!';
+			messageToSend += attacker + ' crit ' + target + ', ' + attackStatus.damage + ' damage!';
 			break;
 		case 'feat':
-			messageToSend = 'You performed an amazing attack! ' + attackStatus.damage + ' damage to ' + attackStatus.target + '!!!';
+			messageToSend += attacker + ' performed an amazing attack! ' + attackStatus.damage + ' damage to ' + target + '!!!';
 			break;
 	}
 	addMessage(messageToSend);
+}
+
+// function addToAILog(message) {
+// 	var currentAILog = document.getElementById('ai_log').innerHTML;
+// 	currentAILog = '<span class="bg-primary">' + message + '</span><br>' + currentAILog;
+
+// 	document.getElementById('ai_log').innerHTML = currentAILog;
+// }
+
+function getSpan(){
+	if(playerTurn){
+		return '<span class="player">';
+	} else {
+		return '<span class="ai">';
+	}
 }
 
 function updateHeroData(){

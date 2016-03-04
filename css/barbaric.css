@@ -10,9 +10,21 @@
 	overflow-y: scroll;
 	height: 200px;
 	font-style: italic;
-	font-size: 12px;
 	margin-top: 10px;
-	color: #a3a3a3;
+}
+
+#ai_log {
+	overflow-y: scroll;
+	height: 200px;
+	margin-top: 10px;
+}
+
+#combat_log .player {
+	color: #bfbfbf;
+}
+
+#combat_log .ai {
+	color: #fa8072;
 }
 
 #player_buttons { 

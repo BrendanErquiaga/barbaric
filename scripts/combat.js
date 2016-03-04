@@ -16,7 +16,7 @@ var standardAttackTable = {
     fumbleCeiling: 1,
     missCeiling: 9,
     dodgeCap: 20,
-    parryCap: 20,
+    parryCap: 15,
     featCeiling: 100
 };
 
@@ -32,8 +32,8 @@ var safeAttackTable = {
 var recklessAttackTable = {
     fumbleCeiling: 5,
     missCeiling: 20,
-    dodgeCap: 20,
-    parryCap: 20,
+    dodgeCap: 30,
+    parryCap: 30,
     featCeiling: 98,
     critChanceMultiplier: 2
 };
@@ -88,20 +88,20 @@ function getCalculatedAttackTable(target, attackTable) {
     };
 
     tempAttackTable.missCeiling = tempAttackTable.fumbleCeiling + tempAttackTable.missCeiling;//Adjust miss ceiling to account for fumble
-    tempAttackTable.dodgeCeiling = getHitStatusCeiling(target.dexterity, tempAttackTable.dodgeCap) + tempAttackTable.missCeiling;//Calculate dodge & adjust to account for miss
-    tempAttackTable.parryCeiling = getHitStatusCeiling(target.strength, tempAttackTable.parryCap) + tempAttackTable.dodgeCeiling;//Calculat parry & adjust to account for miss + dodge
+    tempAttackTable.dodgeCeiling = getHitStatusCeiling(target.dexterity, tempAttackTable.dodgeCap, target.getBuff('Dodge').value) + tempAttackTable.missCeiling;//Calculate dodge & adjust to account for miss
+    tempAttackTable.parryCeiling = getHitStatusCeiling(target.strength/2, tempAttackTable.parryCap, target.getBuff('Parry').value) + tempAttackTable.dodgeCeiling;//Calculat parry & adjust to account for miss + dodge
     tempAttackTable.critFloor = tempAttackTable.featCeiling - tempAttackTable.critChance;//Adjust crit floor to account for feats
 
-    console.log(tempAttackTable);
+    //console.log(tempAttackTable);
 
     return tempAttackTable;
 }
 
-function getHitStatusCeiling(stat,cap){
+function getHitStatusCeiling(stat,cap, buffValue){
     if(stat >= cap)
-        return cap;
+        return cap + buffValue;
     else
-        return stat;
+        return stat + buffValue;
 }
 
 function calculateDamage(damage, hitStatus) {

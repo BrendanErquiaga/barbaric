@@ -119,6 +119,33 @@ var hasHealthAndStats = function hasHealthAndStats(state, hp) {
     }
 }
 
+var hasBuffs = function hasBuffs(state) {
+    var buffs = [];
+
+    return {
+        getBuff: function getBuff(buffName) {
+            for(var i = 0; i < buffs.length; i++){
+                if(buffName === buffs[i].name){
+                    return buffs[i];
+                }
+            }
+
+            buffs.push({name: buffName, value: 0});
+
+            return buffs[buffs.length - 1];
+        },
+        addBuff: function addBuff(buffToAdd) {
+            state.getBuff(buffToAdd.name).value += buffToAdd.value;
+        },
+
+        clearBuffs: function clearBuffs() {
+            buffs.length = 0;
+        }
+    }
+}
+
+
+
 var defaultStatValue = 0, 
     defaultStatModifierDivider = 10;
 var hasStats = function hasStats(state, newStats) {

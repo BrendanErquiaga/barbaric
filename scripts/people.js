@@ -17,7 +17,8 @@ function Human(name, title, hp, stats) {
                hasHealth(humanState,hp),
                hasHealthAndStats(humanState,hp),
                canEquipEquipment(humanState),
-               canAttack(humanState));
+               canAttack(humanState),
+               hasBuffs(humanState));
 }
 
 function AbilityUser(name, title, hp, stats, ability) {
