@@ -1,7 +1,8 @@
 "use strict";
 
 var critMultiplier = 2,
-    featMultiplier = 10;
+    featMultiplier = 10,
+    blockDamageReduction = 0.6;
 
 /* Standard Attack Table
     Fumble 1 (Miss Next Attack Round)
@@ -50,6 +51,8 @@ function calculateHitStatus(target, attackRoll, attackTable) {
         return 'dodge';
     } else if (attackRoll <= calculatedAttackTable.parryCeiling){
         return 'parry';
+    } else if (attackRoll <= calculatedAttackTable.blockCeiling){
+        return 'block';
     } else if (attackRoll < calculatedAttackTable.critFloor){
         return 'normal'
     } else if (attackRoll >= calculatedAttackTable.featCeiling){
@@ -90,6 +93,7 @@ function getCalculatedAttackTable(target, attackTable) {
     tempAttackTable.missCeiling = tempAttackTable.fumbleCeiling + tempAttackTable.missCeiling;//Adjust miss ceiling to account for fumble
     tempAttackTable.dodgeCeiling = getHitStatusCeiling(target.dexterity, tempAttackTable.dodgeCap, target.getBuff('Dodge').value) + tempAttackTable.missCeiling;//Calculate dodge & adjust to account for miss
     tempAttackTable.parryCeiling = getHitStatusCeiling(target.strength/2, tempAttackTable.parryCap, target.getBuff('Parry').value) + tempAttackTable.dodgeCeiling;//Calculat parry & adjust to account for miss + dodge
+    tempAttackTable.blockCeiling = target.getBuff('Block').value + tempAttackTable.parryCeiling;
     tempAttackTable.critFloor = tempAttackTable.featCeiling - tempAttackTable.critChance;//Adjust crit floor to account for feats
 
     //console.log(tempAttackTable);
@@ -111,6 +115,8 @@ function calculateDamage(damage, hitStatus) {
         case 'dodge':
         case 'parry':
             return 0;
+        case 'block':
+            return damage * blockDamageReduction;
         case 'crit':
             return damage * critMultiplier;
         case 'feat':

@@ -13,9 +13,9 @@ function initAI() {
 
 function takeAIAction(){
 	pickAIActionCategory();
+
 	performAction();
 
-	//addToAILog(aiSafetyChoice + ' ' + aiActionCategory);
 	pickAISafety();
 }
 
@@ -57,11 +57,11 @@ function pickAIActionCategory() {
 			aiActionCategory = 'Trick';
 		}
 
-		console.log('Taking preferred action which is probably...' + aiSafetyChoice + ' ' + aiActionCategory);
+		//console.log('Taking preferred action which is probably...' + aiSafetyChoice + ' ' + aiActionCategory);
 	} else {
 		pickRandomAction();
 
-		console.log('We picked a random action which is: ' + aiSafetyChoice + ' ' + aiActionCategory);
+		//console.log('We picked a random action which is: ' + aiSafetyChoice + ' ' + aiActionCategory);
 	}
 }
 
