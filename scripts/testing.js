@@ -1,7 +1,10 @@
 
 
 function runTests(){
-
+    conan.addBuff({name:'Dodge', value:2});
+    conan.addBuff({name:'Dodge', value:2});
+    conan.clearBuffs();
+    console.log(conan.getBuff('Dodge'));
     // rollTests();
 }
 

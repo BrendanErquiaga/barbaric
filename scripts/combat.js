@@ -32,8 +32,8 @@ var safeAttackTable = {
 var recklessAttackTable = {
     fumbleCeiling: 5,
     missCeiling: 20,
-    dodgeCap: 20,
-    parryCap: 20,
+    dodgeCap: 30,
+    parryCap: 30,
     featCeiling: 98,
     critChanceMultiplier: 2
 };
