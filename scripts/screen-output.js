@@ -18,7 +18,7 @@ function addAttackToLog(attackStatus){
 		target = attackStatus.target;
 
 	if(!playerTurn){
-		attacker = target;
+		attacker = hero2;
 		target = 'You';
 	}
 
@@ -36,10 +36,10 @@ function addAttackToLog(attackStatus){
 			messageToSend += attacker + ' fumbled oh no!';
 			break;
 		case 'normal':
-			messageToSend += attacker + ' hit ' + target + ', ' + attackStatus.damage + ' damage.';
+			messageToSend += attacker + ' hit ' + target + ', ' + attackStatus.damage + ' dmg';
 			break;
 		case 'crit':
-			messageToSend += attacker + ' crit ' + target + ', ' + attackStatus.damage + ' damage!';
+			messageToSend += attacker + ' crit ' + target + ', ' + attackStatus.damage + ' dmg!';
 			break;
 		case 'feat':
 			messageToSend += attacker + ' performed an amazing attack! ' + attackStatus.damage + ' damage to ' + target + '!!!';
