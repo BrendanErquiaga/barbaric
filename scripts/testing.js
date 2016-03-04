@@ -2,8 +2,8 @@
 
 function runTests(){
     //conan.addBuff({name:'Dodge', value:5});
-    console.log(conan.getBuff('Dodge'));
-    rollTests();
+    // console.log(conan.getBuff('Dodge'));
+    // rollTests();
 }
 
 function rollTests(){

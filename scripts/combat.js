@@ -16,7 +16,7 @@ var standardAttackTable = {
     fumbleCeiling: 1,
     missCeiling: 9,
     dodgeCap: 20,
-    parryCap: 20,
+    parryCap: 15,
     featCeiling: 100
 };
 
@@ -89,7 +89,7 @@ function getCalculatedAttackTable(target, attackTable) {
 
     tempAttackTable.missCeiling = tempAttackTable.fumbleCeiling + tempAttackTable.missCeiling;//Adjust miss ceiling to account for fumble
     tempAttackTable.dodgeCeiling = getHitStatusCeiling(target.dexterity, tempAttackTable.dodgeCap, target.getBuff('Dodge').value) + tempAttackTable.missCeiling;//Calculate dodge & adjust to account for miss
-    tempAttackTable.parryCeiling = getHitStatusCeiling(target.strength, tempAttackTable.parryCap, target.getBuff('Parry').value) + tempAttackTable.dodgeCeiling;//Calculat parry & adjust to account for miss + dodge
+    tempAttackTable.parryCeiling = getHitStatusCeiling(target.strength/2, tempAttackTable.parryCap, target.getBuff('Parry').value) + tempAttackTable.dodgeCeiling;//Calculat parry & adjust to account for miss + dodge
     tempAttackTable.critFloor = tempAttackTable.featCeiling - tempAttackTable.critChance;//Adjust crit floor to account for feats
 
     //console.log(tempAttackTable);

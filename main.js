@@ -19,9 +19,20 @@ function updateDisplay(){
 }
 
 function playerActionTaken(){
-    updateDisplay();
-    playerTurn = false;
+    updateDisplay();    
     takeAIAction();
+    updateDisplay(); 
+}
+
+function advanceTurn(){
+    if(playerTurn){
+        hero2.clearBuffs();
+    } else {
+        hero1.clearBuffs();
+    }
+
+    playerTurn = !playerTurn;
+    //console.log("Currently it is the players turn: " + playerTurn);
 }
 
 function takeAIAction() {
@@ -38,7 +49,8 @@ $(document).ready(function() {
                'scripts/combat','scripts/screen-output',
                'scripts/testing','scripts/itemSetup',
                'scripts/heroSetup', 'scripts/bootstrap',
-               'scripts/input','scripts/ai'], function() {
+               'scripts/input','scripts/ai',
+               'scripts/actions'], function() {
         rampage();
     });
 });

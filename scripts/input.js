@@ -36,46 +36,43 @@ function catchDefaultButtonInput(){
 }
 
 function catchAttackButtonInput(){
-	$('#weaponAttackButton').on('click', function () {
-        addAttackToLog(attemptToAttack(hero1, hero2));
-        playerActionTaken();
+	$('#safeAttackButton').on('click', function () {
+    	attackAction(hero1, hero2, 'Safe');       
     })
 
-    $('#safeAttackButton').on('click', function () {
-    	addAttackToLog(attemptToAttack(hero1, hero2, safeAttackTable));
-        playerActionTaken();        
+	$('#weaponAttackButton').on('click', function () {
+        attackAction(hero1, hero2, 'Normal');
     })
 
     $('#recklessAttackButton').on('click', function () {
-    	addAttackToLog(attemptToAttack(hero1, hero2, recklessAttackTable));
-        playerActionTaken();        
+    	attackAction(hero1, hero2, 'Reckless');        
     })
 }
 
 function catchDefenseButtonInput(){
 	$('#blockButton').on('click', function () {
-        playerActionTaken();
+		defendAction(hero1, hero2, 'Safe');
     })
 
     $('#dodgeButton').on('click', function () {
-        playerActionTaken();        
+		defendAction(hero1, hero2, 'Normal');
     })
 
     $('#parryButton').on('click', function () {
-        playerActionTaken();        
+		defendAction(hero1, hero2, 'Reckless');      
     })
 }
 
 function catchTrickeryButtonInput(){
 	$('#confuseButton').on('click', function () {
-        playerActionTaken();
+        trickAction(hero1, hero2, 'Safe');
     })
 
     $('#interruptButton').on('click', function () {
-        playerActionTaken();        
+        trickAction(hero1, hero2, 'Normal');       
     })
 
     $('#disarmButton').on('click', function () {
-        playerActionTaken();        
+        trickAction(hero1, hero2, 'Reckless');
     })
 }

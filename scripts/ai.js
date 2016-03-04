@@ -11,54 +11,26 @@ function initAI() {
 	}
 }
 
-function takeEnemyAction(){
+function takeAIAction(){
 	pickAIActionCategory();
 	performAction();
 
 	//addToAILog(aiSafetyChoice + ' ' + aiActionCategory);
-	pickAISafety();	
+	pickAISafety();
 }
 
 function performAction(){
 	switch(aiActionCategory){
 		case 'Attack':
-			performAttackAction();
+			attackAction(hero2, hero1, aiSafetyChoice);
 			break;
 		case 'Defend':
-			performDefendAction();
+			defendAction(hero2, hero1, aiSafetyChoice);
 			break;
 		case 'Trick':
-			performTrickAction();
+			trickAction(hero2, hero1, aiSafetyChoice);
 			break;
 	}
-}
-
-function performAttackAction(){
-	var attackTableToUse;
-
-	switch(aiSafetyChoice){
-		case 'Safe':
-			attackTableToUse = safeAttackTable;
-			break;
-		case 'Normal':
-			attackTableToUse = standardAttackTable;
-			break;
-		case 'Reckless':
-			attackTableToUse = recklessAttackTable;
-			break;
-		default:
-			attackTableToUse = standardAttackTable;
-	}
-
-	addAttackToLog(attemptToAttack(hero2, hero1, attackTableToUse));
-}
-
-function performDefendAction(){
-
-}
-
-function performTrickAction(){
-
 }
 
 function pickAISafety(){

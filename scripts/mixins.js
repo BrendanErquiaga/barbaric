@@ -97,6 +97,28 @@ var hasHealth = function hasHealth(state, hp) {
     };
 };
 
+var hasHealthAndStats = function hasHealthAndStats(state, hp) {
+    var currentHP = hp,
+        maxHP = hp,
+        baseHP = hp;
+
+    return {
+        get baseHP() { return baseHP; },
+        get currentHP() {
+            return currentHP + (currentHP * state.constitutionModifier); 
+        },
+        set currentHP(value) { 
+            currentHP = value;
+        },
+        get maxHP() {
+            return maxHP + (maxHP * state.constitutionModifier); 
+        },
+        set maxHP(value) {
+            maxHP = value;
+        }
+    }
+}
+
 var hasBuffs = function hasBuffs(state) {
     var buffs = [];
 
@@ -122,27 +144,7 @@ var hasBuffs = function hasBuffs(state) {
     }
 }
 
-var hasHealthAndStats = function hasHealthAndStats(state, hp) {
-    var currentHP = hp,
-        maxHP = hp,
-        baseHP = hp;
 
-    return {
-        get baseHP() { return baseHP; },
-        get currentHP() {
-            return currentHP + (currentHP * state.constitutionModifier); 
-        },
-        set currentHP(value) { 
-            currentHP = value;
-        },
-        get maxHP() {
-            return maxHP + (maxHP * state.constitutionModifier); 
-        },
-        set maxHP(value) {
-            maxHP = value;
-        }
-    }
-}
 
 var defaultStatValue = 0, 
     defaultStatModifierDivider = 10;
