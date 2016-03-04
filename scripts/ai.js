@@ -14,6 +14,8 @@ function initAI() {
 function takeEnemyAction(){
 	pickAIActionCategory();
 	performAction();
+
+	//addToAILog(aiSafetyChoice + ' ' + aiActionCategory);
 	pickAISafety();	
 }
 

@@ -10,7 +10,12 @@
 	overflow-y: scroll;
 	height: 200px;
 	font-style: italic;
-	font-size: 12px;
+	margin-top: 10px;
+}
+
+#ai_log {
+	overflow-y: scroll;
+	height: 200px;
 	margin-top: 10px;
 }
 

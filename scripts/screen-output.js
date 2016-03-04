@@ -1,6 +1,14 @@
 "use strict";
 
-var currentMessage = "";
+var currentCombatLogMessage = "";
+
+function updateCenterLog() {
+	var turnText = 'Your Turn';
+	if(!playerTurn){
+		turnText = 'Enemy Turn';
+	}
+	document.querySelector('#turn_info').textContent = turnText;
+}
 
 function updateMessage(newMessage){
     //$('.message').html(newMessage);
@@ -8,8 +16,8 @@ function updateMessage(newMessage){
 }
 
 function addMessage(message){
-    currentMessage = getSpan() + message + "</span><br>" + currentMessage;
-    updateMessage(currentMessage);
+    currentCombatLogMessage = getSpan() + message + "</span><br>" + currentCombatLogMessage;
+    updateMessage(currentCombatLogMessage);
 }
 
 function addAttackToLog(attackStatus){
@@ -36,10 +44,10 @@ function addAttackToLog(attackStatus){
 			messageToSend += attacker + ' fumbled oh no!';
 			break;
 		case 'normal':
-			messageToSend += attacker + ' hit ' + target + ', ' + attackStatus.damage + ' dmg';
+			messageToSend += attacker + ' hit ' + target + ', ' + attackStatus.damage + ' damage';
 			break;
 		case 'crit':
-			messageToSend += attacker + ' crit ' + target + ', ' + attackStatus.damage + ' dmg!';
+			messageToSend += attacker + ' crit ' + target + ', ' + attackStatus.damage + ' damage!';
 			break;
 		case 'feat':
 			messageToSend += attacker + ' performed an amazing attack! ' + attackStatus.damage + ' damage to ' + target + '!!!';
@@ -47,6 +55,13 @@ function addAttackToLog(attackStatus){
 	}
 	addMessage(messageToSend);
 }
+
+// function addToAILog(message) {
+// 	var currentAILog = document.getElementById('ai_log').innerHTML;
+// 	currentAILog = '<span class="bg-primary">' + message + '</span><br>' + currentAILog;
+
+// 	document.getElementById('ai_log').innerHTML = currentAILog;
+// }
 
 function getSpan(){
 	if(playerTurn){
@@ -90,14 +105,6 @@ function updateHeroFields(heroToUse, heroNumber) {
     document.querySelector(heroDiv + ' .hero_weapon').textContent = heroToUse.weapon();
     document.querySelector(heroDiv + ' .hero_weaponInfo').textContent = heroToUse.weapon().description;
     document.querySelector(heroDiv + ' .hero_weaponDamage').textContent = heroToUse.weapon().attackInfo.min + '-' + heroToUse.weapon().attackInfo.max;
-}
-
-function updateCenterLog() {
-	var turnText = 'Your Turn';
-	if(!playerTurn){
-		turnText = 'Enemy Turn';
-	}
-	document.querySelector('#turn_info').textContent = turnText;
 }
 
 
