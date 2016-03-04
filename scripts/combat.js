@@ -88,20 +88,20 @@ function getCalculatedAttackTable(target, attackTable) {
     };
 
     tempAttackTable.missCeiling = tempAttackTable.fumbleCeiling + tempAttackTable.missCeiling;//Adjust miss ceiling to account for fumble
-    tempAttackTable.dodgeCeiling = getHitStatusCeiling(target.dexterity, tempAttackTable.dodgeCap) + tempAttackTable.missCeiling;//Calculate dodge & adjust to account for miss
-    tempAttackTable.parryCeiling = getHitStatusCeiling(target.strength, tempAttackTable.parryCap) + tempAttackTable.dodgeCeiling;//Calculat parry & adjust to account for miss + dodge
+    tempAttackTable.dodgeCeiling = getHitStatusCeiling(target.dexterity, tempAttackTable.dodgeCap, target.getBuff('Dodge').value) + tempAttackTable.missCeiling;//Calculate dodge & adjust to account for miss
+    tempAttackTable.parryCeiling = getHitStatusCeiling(target.strength, tempAttackTable.parryCap, target.getBuff('Parry').value) + tempAttackTable.dodgeCeiling;//Calculat parry & adjust to account for miss + dodge
     tempAttackTable.critFloor = tempAttackTable.featCeiling - tempAttackTable.critChance;//Adjust crit floor to account for feats
 
-    console.log(tempAttackTable);
+    //console.log(tempAttackTable);
 
     return tempAttackTable;
 }
 
-function getHitStatusCeiling(stat,cap){
+function getHitStatusCeiling(stat,cap, buffValue){
     if(stat >= cap)
-        return cap;
+        return cap + buffValue;
     else
-        return stat;
+        return stat + buffValue;
 }
 
 function calculateDamage(damage, hitStatus) {

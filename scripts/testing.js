@@ -1,19 +1,17 @@
 
 
 function runTests(){
-    conan.addBuff({name:'Dodge', value:2});
-    conan.addBuff({name:'Dodge', value:2});
-    conan.clearBuffs();
+    //conan.addBuff({name:'Dodge', value:5});
     console.log(conan.getBuff('Dodge'));
-    // rollTests();
+    rollTests();
 }
 
 function rollTests(){
     for(var i = 1; i <= 100; i++){
-        console.log('Rolled ' + i + ' ' + calculateHitStatus(conan, i, getAttackTableWithCrit(recklessAttackTable,10)));
+        console.log('Rolled ' + i + ' ' + calculateHitStatus(conan, i, getAttackTableWithCrit(standardAttackTable,10)));
     }
 
-    for(var i = 1; i <= 100; i++){
-        console.log('Rolled ' + rollDie(21));
-    }
+    // for(var i = 1; i <= 100; i++){
+    //     console.log('Rolled ' + rollDie(21));
+    // }
 }
