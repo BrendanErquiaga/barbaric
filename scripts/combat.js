@@ -116,11 +116,11 @@ function calculateDamage(damage, hitStatus) {
         case 'parry':
             return 0;
         case 'block':
-            return damage * blockDamageReduction;
+            return Math.round(damage * blockDamageReduction);
         case 'crit':
-            return damage * critMultiplier;
+            return Math.round(damage * critMultiplier);
         case 'feat':
-            return damage * featMultiplier;
+            return Math.round(damage * featMultiplier);
         default:
             return damage;
     }
