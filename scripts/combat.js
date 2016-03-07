@@ -144,7 +144,7 @@ function attemptToAttack(attacker, target, attackTable) {
 
     //console.log(attackTableToUse);
 
-    if(attackStatus === 'fumble'){
+    if(attackStatus.hitStatus === 'fumble'){
         attacker.addBuff({name: 'Fumbled', value: 1, duration: 1});
     }
 

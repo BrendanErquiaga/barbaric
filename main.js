@@ -3,7 +3,8 @@
 var hero1,
     hero2,
     currentButtonMode = 'Default',
-    playerTurn = false;
+    playerTurn = false,
+    turnCounter = 0;
 
 function rampage(){
     runTests();
@@ -29,6 +30,7 @@ function advanceTurn(){
         hero2.lowerBuffDuration();
     } else {
         hero1.lowerBuffDuration();
+        turnCounter++;
     }
 
     playerTurn = !playerTurn;
