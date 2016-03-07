@@ -130,16 +130,31 @@ var hasBuffs = function hasBuffs(state) {
                 }
             }
 
-            buffs.push({name: buffName, value: 0});
-
-            return buffs[buffs.length - 1];
+            return {name: 'Empty', value: 0 };
         },
         addBuff: function addBuff(buffToAdd) {
-            state.getBuff(buffToAdd.name).value += buffToAdd.value;
-        },
+            var tempBuff = state.getBuff(buffToAdd.name);
 
+            if(tempBuff.name === buffToAdd.name) {
+                tempBuff.value += buffToAdd.value;
+                tempBuff.duration += buffToAdd.duration;
+            } else {
+                if(buffToAdd.duration === undefined){
+                    buffToAdd.duration = 0;
+                }
+                buffs.push(buffToAdd);
+            }
+        },
         clearBuffs: function clearBuffs() {
             buffs.length = 0;
+        },
+        lowerBuffDuration: function lowerBuffDuration(){
+            for(var i = 0; i < buffs.length; i++){
+                buffs[i].duration--;
+                if(buffs[i].duration < 0){
+                    buffs.splice(i,1);
+                }
+            }
         }
     }
 }
@@ -208,8 +223,6 @@ var canAttack = function canAttack(state) {
         },
         weaponAttack: function(target, weapon){
             var weaponDamage = weapon.getWeaponDamage();
-
-            console.log(state + ' attacks ' + target + ' with ' + weapon + ' for ' + weaponDamage);
 
             target.currentHP -= weaponDamage;
         }

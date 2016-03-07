@@ -26,13 +26,12 @@ function playerActionTaken(){
 
 function advanceTurn(){
     if(playerTurn){
-        hero2.clearBuffs();
+        hero2.lowerBuffDuration();
     } else {
-        hero1.clearBuffs();
+        hero1.lowerBuffDuration();
     }
 
     playerTurn = !playerTurn;
-    //console.log("Currently it is the players turn: " + playerTurn);
 }
 
 function takeAIAction() {

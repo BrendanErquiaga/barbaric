@@ -4,6 +4,7 @@ function runTests(){
     //conan.addBuff({name:'Block', value:75});
     // console.log(conan.getBuff('Dodge'));
     //rollTests();
+    //conan.addBuff({name: 'Fumbled', value: 1, duration: 1});
 }
 
 function rollTests(){
