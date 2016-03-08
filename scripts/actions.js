@@ -54,7 +54,9 @@ function trickAction(actor, actee, safetyMode) {
 		var statCheck = getSafetyOption(safetyMode,
 						 {actorValue: actor.charisma, acteeValue: actee.intelligenceModifier},
 						 {actorValue: actor.wisdom, acteeValue: actee.wisdom},
-						 {actorValue: (actor.dexterity / 2), acteeValue: actee.strength});
+						 {actorValue: actor.dexterity, 
+						 	acteeValue: 16 + actee.strengthModifier + actee.dexterityModifier + 
+						 	actee.intelligenceModifier + actee.wisdomModifier});
 
 		var actorRoll = rollDie(11),
 			acteeRoll = rollDie(11);
@@ -65,11 +67,29 @@ function trickAction(actor, actee, safetyMode) {
 		console.log('actorRoll: ' + actorRoll + ' vs ' + acteeRoll + ' :acteeRoll');
 
 		if(actorRoll > acteeRoll){
-			console.log('Congrats ' + actor + ' successfully confused/interrupted/disarmed ' + actee);
+			
+
+			var trickOption = getSafetyOption(safetyMode, 
+								{name: 'Confused', value: 1, duration: 1}, 
+								{name: 'Fumbled', value: 1, duration: 1},
+								'disarm');
+
+			if(safetyMode === 'Reckless'){
+				disarm(actor,actee);
+			} else {
+				console.log('Congrats ' + actor + ' successfully ' + trickOption.name + ' ' + actee);
+				actee.addBuff(trickOption);
+			}
 		}
 	}
 
 	actionTaken();
+}
+
+function disarm(dismarmer, disarmee){
+	disarmee.dropEquipment(disarmee.weapon());
+
+	console.log(dismarmer + ' disarmed ' + disarmee);
 }
 
 function checkAction(actor) {

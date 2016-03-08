@@ -2,7 +2,8 @@
 
 function runTests(){
     //conan.addBuff({name:'Block', value:75});
-    // console.log(conan.getBuff('Dodge'));
+    conan.dexterity = 19;
+    conan.strength = 20;
     //rollTests();
     //conan.addBuff({name: 'Fumbled', value: 1, duration: 1});
 }
