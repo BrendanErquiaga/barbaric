@@ -43,9 +43,23 @@ function getRandomHero(){
 }
 
 function setDarkHero(hero){
-    var newHero = new Human('Evil ' + hero.name, hero.title, hero.baseHP, hero.stats);
-    newHero.equipment = hero.equipment;
+    var newHero = new Human('Evil ' + hero.name, hero.title, hero.baseHP, hero.getStats());
+    newHero.equipment = copyHeroEquipment(hero.equipment);
     return newHero;
+}
+
+function copyHeroEquipment(equipmentToCopy) {
+    var newEquipment = [];
+
+    for(var i = 0; i < equipmentToCopy.length; i++){
+        if(equipmentToCopy[i].type == 'weapon'){
+            newEquipment.push(new CopyWeapon(equipmentToCopy[i]));
+        } else {
+            newEquipment.push(new CopyEquipment(equipmentToCopy[i]));
+        }
+    }
+
+    return newEquipment;
 }
 
 function determineStartingPlayer(){

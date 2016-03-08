@@ -5,7 +5,8 @@ function Item(name, description, type) {
   var itemState = {
     name: name,
     description: description,
-    type: type
+    type: type,
+    id: rollDie(1000)
   };
 
   return Object.assign(itemState, canBeIdentifiedByName(itemState));
@@ -26,6 +27,10 @@ function Equipment(name, description, type, slot, stats) {
   return Object.assign(equipmentState, new ItemWithStats(name, description, type, stats));
 }
 
+function CopyEquipment(equipment){
+  return new Equipment(equipment.name, equipment.description, equipment.type, equipment.slot, equipment.stats);
+}
+
 function Weapon(name, description, attackInfo, stats){
     var weaponState = {
         attackInfo:attackInfo,
@@ -36,6 +41,10 @@ function Weapon(name, description, attackInfo, stats){
     };
 
     return Object.assign(weaponState, new Equipment(name, description, 'weapon','hands', stats));
+}
+
+function CopyWeapon(weapon) {
+  return new Weapon(weapon.name, weapon.description, weapon.attackInfo, weapon.stats);
 }
 
 /* Item Types

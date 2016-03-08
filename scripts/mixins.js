@@ -22,11 +22,13 @@ var canBeIdentifiedByTitle = function canBeIdentifiedByTitle(state){
 }
 
 var canEquipEquipment = function canEquipEquipment(state){
+    var defaultWeapon = fists;
+
     return {
         dropEquipment: function dropEquipment(itemToDrop){
-            //console.log(state + ' dropped ' + itemToDrop + ' ...');
+            console.log(state + ' dropped ' + itemToDrop + ' ...');
             var index = state.equipment.indexOf(itemToDrop);
-            state.equipment.splice(index -1, 1);
+            state.equipment.splice(index, 1);
         },
 
         equip: function equip(itemToEquip){
@@ -56,10 +58,17 @@ var canEquipEquipment = function canEquipEquipment(state){
                 }
             }
 
-            return '';
+            return 'Empty';
         },
         weapon: function weapon(){
-            return state.firstItemOfType('weapon');
+            var tempWeapon = state.firstItemOfType('weapon');
+
+            if(tempWeapon == "Empty"){
+                state.equip(defaultWeapon);
+                tempWeapon = state.firstItemOfType('weapon');
+            }
+
+            return tempWeapon;
         }
     };
 };
@@ -130,16 +139,31 @@ var hasBuffs = function hasBuffs(state) {
                 }
             }
 
-            buffs.push({name: buffName, value: 0});
-
-            return buffs[buffs.length - 1];
+            return {name: 'Empty', value: 0 };
         },
         addBuff: function addBuff(buffToAdd) {
-            state.getBuff(buffToAdd.name).value += buffToAdd.value;
-        },
+            var tempBuff = state.getBuff(buffToAdd.name);
 
+            if(tempBuff.name === buffToAdd.name) {
+                tempBuff.value += buffToAdd.value;
+                tempBuff.duration += buffToAdd.duration;
+            } else {
+                if(buffToAdd.duration === undefined){
+                    buffToAdd.duration = 0;
+                }
+                buffs.push(buffToAdd);
+            }
+        },
         clearBuffs: function clearBuffs() {
             buffs.length = 0;
+        },
+        lowerBuffDuration: function lowerBuffDuration(){
+            for(var i = 0; i < buffs.length; i++){
+                buffs[i].duration--;
+                if(buffs[i].duration < 0){
+                    buffs.splice(i,1);
+                }
+            }
         }
     }
 }
@@ -149,7 +173,7 @@ var hasBuffs = function hasBuffs(state) {
 var defaultStatValue = 0, 
     defaultStatModifierDivider = 10;
 var hasStats = function hasStats(state, newStats) {
-    var stats = newStats,
+    var setupStats = newStats,
         charisma = newStats.charisma || newStats.default || defaultStatValue,
         constitution = newStats.constitution || newStats.default ||defaultStatValue,
         dexterity = newStats.dexterity || newStats.default ||defaultStatValue,
@@ -158,8 +182,7 @@ var hasStats = function hasStats(state, newStats) {
         wisdom = newStats.wisdom || newStats.default ||defaultStatValue;
 
     return {
-        get stats() { return stats; },
-
+        get stats() { return setupStats; },
         get charisma() { return charisma; },
         get charismaModifier() { return statModifier(charisma); },        
         set charisma(value) { charisma = value; },
@@ -191,7 +214,15 @@ var hasStats = function hasStats(state, newStats) {
                 'Int: ' + state.intelligence + ',' +
                 'Str: ' + state.strength + ',' +
                 'Wis: ' + state.wisdom);
-        }        
+        },
+        getStats: function getStats() { return {
+            charisma: state.charisma,
+            constitution: state.constitution,
+            dexterity: state.dexterity,
+            intelligence: state.intelligence,
+            strength: state.strength,
+            wisdom: state.wisdom};
+        }
     };
 };
 
@@ -208,8 +239,6 @@ var canAttack = function canAttack(state) {
         },
         weaponAttack: function(target, weapon){
             var weaponDamage = weapon.getWeaponDamage();
-
-            console.log(state + ' attacks ' + target + ' with ' + weapon + ' for ' + weaponDamage);
 
             target.currentHP -= weaponDamage;
         }

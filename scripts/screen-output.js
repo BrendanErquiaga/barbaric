@@ -7,6 +7,8 @@ function updateCenterLog() {
 	if(!playerTurn){
 		turnText = 'Enemy Turn';
 	}
+
+	turnText += ' | Turn ' + turnCounter.toString();
 	document.querySelector('#turn_info').textContent = turnText;
 }
 
@@ -45,6 +47,9 @@ function addAttackToLog(attackStatus){
 			break;
 		case 'normal':
 			messageToSend += attacker + ' hit ' + target + ', ' + attackStatus.damage + ' damage';
+			break;
+		case 'block':
+			messageToSend += target + ' blocked ' + attacker + ', only ' + attackStatus.damage + ' damage taken';
 			break;
 		case 'crit':
 			messageToSend += attacker + ' crit ' + target + ', ' + attackStatus.damage + ' damage!';
