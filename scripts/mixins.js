@@ -173,7 +173,7 @@ var hasBuffs = function hasBuffs(state) {
 var defaultStatValue = 0, 
     defaultStatModifierDivider = 10;
 var hasStats = function hasStats(state, newStats) {
-    var stats = newStats,
+    var setupStats = newStats,
         charisma = newStats.charisma || newStats.default || defaultStatValue,
         constitution = newStats.constitution || newStats.default ||defaultStatValue,
         dexterity = newStats.dexterity || newStats.default ||defaultStatValue,
@@ -182,8 +182,7 @@ var hasStats = function hasStats(state, newStats) {
         wisdom = newStats.wisdom || newStats.default ||defaultStatValue;
 
     return {
-        get stats() { return stats; },
-
+        get stats() { return setupStats; },
         get charisma() { return charisma; },
         get charismaModifier() { return statModifier(charisma); },        
         set charisma(value) { charisma = value; },
@@ -215,7 +214,15 @@ var hasStats = function hasStats(state, newStats) {
                 'Int: ' + state.intelligence + ',' +
                 'Str: ' + state.strength + ',' +
                 'Wis: ' + state.wisdom);
-        }        
+        },
+        getStats: function getStats() { return {
+            charisma: state.charisma,
+            constitution: state.constitution,
+            dexterity: state.dexterity,
+            intelligence: state.intelligence,
+            strength: state.strength,
+            wisdom: state.wisdom};
+        }
     };
 };
 
